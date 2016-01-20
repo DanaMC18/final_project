@@ -31,7 +31,7 @@ https://gomockingbird.com/projects/pqqwxfz
 ##ERD
 ```
 MongoDB: napstr
-Collection: napsters
+Collection: napstrs
 Document: 
   [{name: 'string',
   username: 'string',
