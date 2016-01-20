@@ -27,3 +27,22 @@ Napstr is an app for the nap enthusiast. Users can search for fellow DTN users i
 
 ##Wire Frames 
 https://gomockingbird.com/projects/pqqwxfz
+
+##ERD
+```
+MongoDB: napstr
+Collection: napsters
+Document: 
+  [{name: 'string',
+  username: 'string',
+  profilePic: 'string',
+  aboutMe: 'string',
+  location: 'string',
+  availability: date/time,
+  napPreferences: ['string', 'string'],
+  envPreferences: ['string', 'string'],
+  reviews: [{user: 'string',
+            content: 'string'}],
+  rating: integer,
+  requestPending?: boolean}]
+```
