@@ -8,9 +8,9 @@ I plan on using a MEAN stack for either project.
 - A user should be able to search a tv show or movie.
 - A user should be provided a list of services that are currently streaming the searched title.
 - A user should be able to follow a link to that streaming service to then watch the show/movie.
-- A user should be able to take part in discussion of a show or movie on the title's results page.
 
 **Sprint**
+- A user should be able to take part in discussion of a show or movie on the title's results page.
 - A user should be able to log in and have a profile page.
 - A user should be able to mark titles as 'favorites'.
 - A user should be able to follow a title (if new seasons are added or if a new streaming service offers the title, they are notified).
