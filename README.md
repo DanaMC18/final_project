@@ -46,3 +46,9 @@ Document:
   rating: integer,
   requestPending?: boolean}]
 ```
+
+##Technologies Used
+- MongoDB
+- Express
+- Angular
+- Node.js
