@@ -39,13 +39,14 @@ Document:
   aboutMe: 'string',
   address: 'string',
   availability: date/time,
+  rating: integer,
   geolocation: {lat: integer, long: integer},
   napPreferences: ['string', 'string'],
   envPreferences: ['string', 'string'],
   reviews: [{user: 'string',
             content: 'string'}],
-  rating: integer,
-  requestPending?: boolean}]
+  requests: [[name: 'string', pending?: boolean, confirmed?: boolean, date: 'string'}]
+  ]
 ```
 
 ##Technologies Used
