@@ -1,18 +1,27 @@
 console.log('zzzz');
 
-$(document).ready(function(){
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: 40.5860, lng: -73.6678},
+  scrollwheel: false,
+  zoom: 15
+  });
+  var infoWindow = new google.maps.InfoWindow({map: map});
 
   var displayPosition = function(position) {
     console.log('Latitude: ' + position.coords.latitude + ', Longitude: ' + position.coords.longitude);
     console.log(watchID);
-    
-    var coordsObject = {lat: position.coords.latitude, lng: position.coords.longitude};
+    var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+    infoWindow.setPosition(pos);
+    infoWindow.setContent('You are here.');
+    map.setCenter(pos);
 
     $.ajax({
       url: '/search',
       type: 'post',
       dataType: 'JSON',
-      data: coordsObject
+      data: pos
     }).done(function(response){
       console.log(response)
     })
@@ -26,7 +35,7 @@ $(document).ready(function(){
     };
     console.log('Error: ' + errors[err.code]);
   }
-  
+
   if (navigator.geolocation) {
     console.log('navigator!!!');
     var options = {enableHighAccuracy: true, timeout: 5000, frequency: 1}
@@ -34,7 +43,11 @@ $(document).ready(function(){
   } else {
     alert('Geolocation is not supported by this browser')
   }
+}
 
 
 
-})
+// $(document).ready(function(){
+
+// })
+

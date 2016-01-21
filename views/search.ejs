@@ -22,16 +22,6 @@
   </div> <!-- nav bar -->
 
   <div id="map"> </div>
-  <script type="text/javascript">
-     function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 40.7401067, lng: -73.989606},
-      scrollwheel: false,
-      zoom: 12
-    });
-  }
-  
-  </script>
 
   <script async defer src='https://maps.googleapis.com/maps/api/js?key=<%= napstrKey %>&callback=initMap'></script>
 
