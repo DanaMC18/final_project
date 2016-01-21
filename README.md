@@ -45,7 +45,11 @@ Document:
   envPreferences: ['string', 'string'],
   reviews: [{user: 'string',
             content: 'string'}],
-  requests: [{name: 'string', pending?: boolean, confirmed?: boolean, denied?: boolean, date: 'string'}]
+  requests: [{name: 'string', 
+            pending?: boolean, 
+            confirmed?: boolean, 
+            denied?: boolean, 
+            date: 'string'}]
   ]
 ```
 
@@ -54,3 +58,4 @@ Document:
 - Express
 - AngularJS
 - Node.js
+- Google Maps API
