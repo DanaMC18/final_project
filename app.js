@@ -19,12 +19,23 @@ var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/napstr';
 MongoClient.connect(mongoUrl, function (err, database){
   if (err) {throw err;}
   db = database;
+
+
+
+
   process.on('exit', db.close);
 });
+
+
 
 //routes
 app.get('/', function (req, res){
   res.render('index');
+})
+
+app.post('/', function (req, res){
+  console.log(req.body);
+  res.json(req.body);
 })
 
 app.get('/about', function (req, res){
