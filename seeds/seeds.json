@@ -1,0 +1,28 @@
+[
+{       
+  "name": "Dana",
+  "username": "DanaMC18",
+  "profilePic": "image_url",
+  "aboutMe": "Looking for a dude to cuddle with",
+  "availability": "M - F 12:30pm - 1:30pm",
+  "rating": 5,
+  "geolocation": {"lat": "40.7411", "lng": "-73.9897"},
+  "napPreferences": ["little spoon"],
+  "evnPreferences": ["dark", "quiet"],
+  "reviews": [{"name": "Jon", "content": "would nap again"}],
+  "requests": [{"name": "Jon", "pending": true, "confirmed": false, "denied": false, "date": 2016-01-21}]
+},
+{
+  "name": "Jon",
+  "username": "JonnyCastle",
+  "profilePic": "swazey",
+  "aboutMe": "Looking for a lady...I promise you wont be in the corner",
+  "availability": "M - F 12:30pm - 1:30pm",
+  "rating": 5,
+  "geolocation": {"lat": "40.7421", "lng": "-73.9880"},
+  "napPreferences": ["big spoon"],
+  "envPreferences": ["rain noise", "night light"],
+  "reviews": [{"name": "Baby", "content": "i had the time of my life"}],
+  "requests": [{"name": "Dana", "pending": false, "confirmed": true, "denied": false, "date": 2016-01-20
+}
+]

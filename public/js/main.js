@@ -28,7 +28,7 @@ function initMap() {
       url: '/search',
       type: 'post',
       dataType: 'JSON',
-      data: pos
+      // data: pos
     }).done(function(response){
       console.log(response)
     })
