@@ -6,10 +6,10 @@ $(document).ready(function(){
     console.log('Latitude: ' + position.coords.latitude + ', Longitude: ' + position.coords.longitude);
     console.log(watchID);
     
-    var coordsObject = {lat: position.coords.latitude, long: position.coords.longitude};
+    var coordsObject = {lat: position.coords.latitude, lng: position.coords.longitude};
 
     $.ajax({
-      url: '/',
+      url: '/search',
       type: 'post',
       dataType: 'JSON',
       data: coordsObject
@@ -17,7 +17,7 @@ $(document).ready(function(){
       console.log(response)
     })
   }
-  
+
   var displayError = function(err){
     var errors = {
       1: 'Permission denied',

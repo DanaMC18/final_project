@@ -33,13 +33,32 @@ app.get('/', function (req, res){
   res.render('index');
 })
 
-app.post('/', function (req, res){
-  console.log(req.body);
-  res.json(req.body);
-})
 
 app.get('/about', function (req, res){
   res.render('about');
 })
 
+
+app.get('/search', function (req, res){
+  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY});
+})
+
+
+app.post('/search', function (req, res){
+  console.log(req.body);
+  //going to want to user as current location
+  res.json(req.body);
+})
+
 app.listen(process.env.PORT || 3000);
+
+
+
+
+
+
+
+
+
+
+
