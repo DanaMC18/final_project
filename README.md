@@ -1,8 +1,8 @@
-# Napstr
-Napstr is an app for the nap enthusiast. Users can search for fellow DTN users in their area to share in some naptime activities. Users can set nap preferences, time slots, and availability. It's not creepy. Its napstr. 
+# napstr
+napstr is an app for the nap enthusiast. Users can search for fellow DTN users in their area to share in some naptime activities. Users can set nap preferences, time slots, and availability. It's not creepy. Its napstr. 
 
 
-## Napstr User Stories
+## napstr User Stories
 **Current**
 - A user should be able to search for a potential napping partner.
 - A user will need to denote whether they are available to host a nap or are looking for an invite.
