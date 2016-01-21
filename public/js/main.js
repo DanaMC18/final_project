@@ -13,9 +13,16 @@ function initMap() {
     console.log(watchID);
     var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-    infoWindow.setPosition(pos);
-    infoWindow.setContent('You are here.');
+    // infoWindow.setPosition(pos);
+    // infoWindow.setContent('You are here.');
     map.setCenter(pos);
+
+    var zzz = 'imgs/zzz.png';
+    var napMarker = new google.maps.Marker({
+      position: pos,
+      map: map,
+      icon: zzz
+    });
 
     $.ajax({
       url: '/search',
