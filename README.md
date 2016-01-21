@@ -40,15 +40,15 @@ Document:
   address: 'string',
   availability: date/time,
   rating: integer,
-  geolocation: {lat: integer, long: integer},
+  geolocation: {lat: integer, lng: integer},
   napPreferences: ['string', 'string'],
   envPreferences: ['string', 'string'],
   reviews: [{user: 'string',
             content: 'string'}],
   requests: [{name: 'string', 
-            pending?: boolean, 
-            confirmed?: boolean, 
-            denied?: boolean, 
+            pending: boolean, 
+            confirmed: boolean, 
+            denied: boolean, 
             date: 'string'}]
   ]
 ```
