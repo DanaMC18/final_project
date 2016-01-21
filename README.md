@@ -51,5 +51,5 @@ Document:
 ##Technologies Used
 - MongoDB
 - Express
-- Angular
+- AngularJS
 - Node.js
