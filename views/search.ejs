@@ -35,16 +35,18 @@
   <div ng-controller="UsersController as napstrs">
     
     <h2> napstrs near you:</h2>
-    <select name="filter" ng-model="napstrs.filter">
-      <option value="">
-    </select>
+    <p> Filter:
+    <select ng-model="filterPref">
+      <option value="Big Spoon"> Big Spoon </option>
+      <option value="Little Spoon"> Little Spoon </option>
+      <option value="Side by Side"> Side by Side </option>
+    </select> </p>
     <br>
     
-    <div ng-repeat="napstr in napstrs.all">
+    <div ng-repeat="napstr in napstrs.all | filter:filterPref">
       <p> <strong> {{napstr.username}} </strong>
         <br> <em>{{napstr.aboutMe}}</em>
         <br> Rating: {{napstr.rating}}
-        <br> Preferences {{napstr.napPreferences}}
       </p>
     </div> <!--repeat -->
   

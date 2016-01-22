@@ -84,15 +84,15 @@ app.post('/search', function (req, res){
 app.get('/users', function (req, res){
   // try setting the coordinates to current users's location
   db.collection('napstrs').find({
-  location: 
-  { $near: 
-    {
-      $geometry: {type: 'Point', coordinates: [40.7411, -73.9897]},
-      $minDistance: 0,
-      $maxDistance: 100
+    location: 
+    { $near: 
+      {
+        $geometry: {type: 'Point', coordinates: [40.7411, -73.9897]},
+        $minDistance: 0,
+        $maxDistance: 1000
+      }
     }
-  }
-}).toArray(function (err, data){
+  }).toArray(function (err, data){
     if (err) {
       console.log(err)
     } else {
