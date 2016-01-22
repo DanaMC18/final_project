@@ -28,9 +28,19 @@ function initMap() {
       url: '/search',
       type: 'post',
       dataType: 'JSON',
-      // data: pos
+      data: pos
     }).done(function(response){
-      console.log(response)
+      response.forEach(function(napstr){
+        var lat = parseFloat(napstr.geolocation.lat);
+        var lng = parseFloat(napstr.geolocation.lng);
+        var napstrPos = {'lat': lat, 'lng': lng}
+        new google.maps.Marker({
+          position: napstrPos,
+          map: map,
+          icon: zzz
+        });
+      })
+      // console.log(response)
     })
   }
 

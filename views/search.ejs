@@ -15,15 +15,30 @@
   <div id="nav-bar">
     <ul>
       <li> <a href="/"> napstr </a> </li>
+      <li> | </li>
       <li> <a href="/about"> About </a> </li>
+      <li> | </li>
       <li> <a href="/search"> Search </a> </li>
-      <li> <a href="/"> Login | SignUp </a> </li>
+      <li> | </li>
+      <li> <a href="/"> Login </a> </li>
+      <li> | </li>
+      <li> <a href="/"> Sign Up</a> </li>
     </ul>
   </div> <!-- nav bar -->
 
   <div id="map"> </div>
 
   <script async defer src='https://maps.googleapis.com/maps/api/js?key=<%= napstrKey %>&callback=initMap'></script>
+
+  <div id="napstr-list">
+    <h2> napstrs near you </h2>
+    <% users.forEach(function(user){ %>
+      <div class="napstr">
+        <h3> <%=user.username%> </h3>
+        <p> <%=user.name%> </p>
+      </div>
+    <% }) %>
+  </div>
 
 
 </body>

@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var geocoder = require('geocoder');
 
 //configuration
 app.use(bodyParser.json());
@@ -67,15 +66,25 @@ app.get('/about', function (req, res){
 
 
 app.get('/search', function (req, res){
-  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY});
+  db.collection('napstrs').find({}).toArray(function (err, data){
+    if (err) {
+      console.log(err)
+    } else {
+      // console.log(data);
+      res.render('search', 
+        {napstrKey: process.env.NAPSTR_MAP_KEY, users: data});
+    }
+  })
 })
 
 
 app.post('/search', function (req, res){
-
-
-  res.json(req.body);
+  db.collection('napstrs').find({}).toArray(function (err, data){
+    console.log(data);
+    res.json(data);
+  })
 })
+
 
 app.listen(process.env.PORT || 3000);
 
