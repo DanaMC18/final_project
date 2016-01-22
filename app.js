@@ -28,7 +28,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   //       aboutMe: 'Looking for a dude to cuddle with',
   //       availability: true,
   //       rating: 3,
-  //       geolocation: {lat: '40.7411', lng: '-73.9897'},
+  //       location: {type: 'Point', coordinates: [40.7411, -73.9897]},
   //       napPreferences: ['little spoon'],
   //       evnPreferences: ['dark', 'quiet'],
   //       reviews: [{name: 'Jon', content: 'would nap again'}],
@@ -42,7 +42,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   //       aboutMe: 'I\'d never put you in the corner',
   //       availability: true,
   //       rating: 3,
-  //       geolocation: {lat: '40.7421', lng: '-73.9880'},
+  //       location: {type: 'Point', coordinates: [40.7421, -73.9880]},
   //       napPreferences: ['big spoon'],
   //       envPreferences: ['rain noise', 'night light'],
   //       reviews: [{name: 'Baby', content: 'i had the time of my life'}],
@@ -52,7 +52,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   process.on('exit', db.close);
 });
 
-
+userLocation = []
 
 //routes
 app.get('/', function (req, res){
@@ -66,23 +66,40 @@ app.get('/about', function (req, res){
 
 
 app.get('/search', function (req, res){
-  db.collection('napstrs').find({}).toArray(function (err, data){
-    if (err) {
-      console.log(err)
-    } else {
-      res.render('search', 
-        {napstrKey: process.env.NAPSTR_MAP_KEY, users: data});
-    }
-  })
+  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY});
 })
 
 
 app.post('/search', function (req, res){
+  // var lat = parseFloat(req.body.lat);
+  // var lng = parseFloat(req.body.lng);
+  // userLocation = [lat, lng];
+  // console.log(userLocation);
   db.collection('napstrs').find({}).toArray(function (err, data){
     res.json(data);
   })
 })
 
+
+app.get('/users', function (req, res){
+  // try setting the coordinates to current users's location
+  db.collection('napstrs').find({
+  location: 
+  { $near: 
+    {
+      $geometry: {type: 'Point', coordinates: [40.7411, -73.9897]},
+      $minDistance: 0,
+      $maxDistance: 100
+    }
+  }
+}).toArray(function (err, data){
+    if (err) {
+      console.log(err)
+    } else {
+      res.json(data);
+    }
+  })
+})
 
 app.listen(process.env.PORT || 3000);
 

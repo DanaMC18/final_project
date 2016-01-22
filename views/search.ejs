@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Napstr">
 <head>
   <meta charset="UTF-8">
   <title>napstr</title>
@@ -9,7 +9,8 @@
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/js/app.js"></script>
   <script src="/js/main.js"></script>
-  <script src="/js/users_controller.js"></script></head>
+  <script src="/js/users_controller.js"></script>
+</head>
 <body>
 
   <div id="nav-bar">
@@ -30,15 +31,24 @@
 
   <script async defer src='https://maps.googleapis.com/maps/api/js?key=<%= napstrKey %>&callback=initMap'></script>
 
-  <div id="napstr-list">
-    <h2> napstrs near you </h2>
-    <% users.forEach(function(user){ %>
-      <div class="napstr">
-        <h3> <%=user.username%> </h3>
-        <p> <em> <%=user.aboutMe %> </em> </p>
-      </div>
-    <% }) %>
-  </div>
+  
+  <div ng-controller="UsersController as napstrs">
+    
+    <h2> napstrs near you:</h2>
+    <select name="filter" ng-model="napstrs.filter">
+      <option value="">
+    </select>
+    <br>
+    
+    <div ng-repeat="napstr in napstrs.all">
+      <p> <strong> {{napstr.username}} </strong>
+        <br> <em>{{napstr.aboutMe}}</em>
+        <br> Rating: {{napstr.rating}}
+        <br> Preferences {{napstr.napPreferences}}
+      </p>
+    </div> <!--repeat -->
+  
+  </div> <!--controller -->
 
 
 </body>

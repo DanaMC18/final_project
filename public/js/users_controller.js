@@ -15,6 +15,10 @@ function UsersController($http){
     })
   }
 
+  ctrl.filter = function(){
+
+  }
+  
   ctrl.fetch();
 
 }

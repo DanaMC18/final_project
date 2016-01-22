@@ -31,8 +31,8 @@ function initMap() {
       data: pos
     }).done(function(response){
       response.forEach(function(napstr){
-        var lat = parseFloat(napstr.geolocation.lat);
-        var lng = parseFloat(napstr.geolocation.lng);
+        var lat = parseFloat(napstr.location.coordinates[0]);
+        var lng = parseFloat(napstr.location.coordinates[1]);
         var napstrPos = {'lat': lat, 'lng': lng}
         new google.maps.Marker({
           position: napstrPos,
@@ -42,6 +42,7 @@ function initMap() {
       })
       // console.log(response)
     })
+
   }
 
   var displayError = function(err){
@@ -62,6 +63,18 @@ function initMap() {
   }
 }
 
+
+// db.napstrs.find(
+// {
+//   location: 
+//   { $near: 
+//     {
+//       $geometry: {type: 'Point', coordinates: [40.7411, -73.9897]},
+//       $minDistance: 0,
+//       $maxDistance: 1
+//     }
+//   }
+// })
 
 
 // $(document).ready(function(){
