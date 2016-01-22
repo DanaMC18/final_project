@@ -24,10 +24,10 @@ MongoClient.connect(mongoUrl, function (err, database){
   // db.collection('napstrs').insert({
   //       name: 'Dana',
   //       username: 'DanaMC18',
-  //       profilePic: 'image_url',
+  //       profilePic: 'http://cdn2.pitchfork.com/news/44784/4b25fb88.jpg',
   //       aboutMe: 'Looking for a dude to cuddle with',
   //       availability: true,
-  //       rating: 5,
+  //       rating: 3,
   //       geolocation: {lat: '40.7411', lng: '-73.9897'},
   //       napPreferences: ['little spoon'],
   //       evnPreferences: ['dark', 'quiet'],
@@ -38,10 +38,10 @@ MongoClient.connect(mongoUrl, function (err, database){
   // db.collection('napstrs').insert({
   //       name: 'Jon',
   //       username: 'JonnyCastle',
-  //       profilePic: 'swazey',
-  //       aboutMe: 'Looking for a lady...I promise you wont be in the corner',
+  //       profilePic: 'https://redlightnaps.files.wordpress.com/2007/05/dd20_img_13.jpg',
+  //       aboutMe: 'I\'d never put you in the corner',
   //       availability: true,
-  //       rating: 5,
+  //       rating: 3,
   //       geolocation: {lat: '40.7421', lng: '-73.9880'},
   //       napPreferences: ['big spoon'],
   //       envPreferences: ['rain noise', 'night light'],
@@ -70,7 +70,6 @@ app.get('/search', function (req, res){
     if (err) {
       console.log(err)
     } else {
-      // console.log(data);
       res.render('search', 
         {napstrKey: process.env.NAPSTR_MAP_KEY, users: data});
     }
@@ -80,7 +79,6 @@ app.get('/search', function (req, res){
 
 app.post('/search', function (req, res){
   db.collection('napstrs').find({}).toArray(function (err, data){
-    console.log(data);
     res.json(data);
   })
 })
