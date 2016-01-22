@@ -6,7 +6,7 @@ function initMap() {
   scrollwheel: false,
   zoom: 15
   });
-  var infoWindow = new google.maps.InfoWindow({map: map});
+  // var infoWindow = new google.maps.InfoWindow({map: map});
 
   var displayPosition = function(position) {
     console.log('Latitude: ' + position.coords.latitude + ', Longitude: ' + position.coords.longitude);
