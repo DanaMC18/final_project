@@ -28,7 +28,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   //       name: 'Dana',
   //       username: 'DanaMC18',
   //       email: 'DanaCzinsky@gmail.com',
-  //       password_digest: '',
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
   //       profilePic: 'http://cdn2.pitchfork.com/news/44784/4b25fb88.jpg',
   //       aboutMe: 'Looking for a dude to cuddle with',
   //       availability: true,
