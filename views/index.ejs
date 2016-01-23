@@ -30,6 +30,39 @@
   <h1>Napstr</h1>
   <h3>It's only creepy if you think about it.</h3>
 
+  <% if (!username) { %>
+    <h3> Login </h3>
+    <form action="/login" method="post">
+      <label for="username"> Username:
+      <input type="text" name="username">
+      <br>
+      <label for="password"> Password:
+      <input type="password" name="password">
+      <br>
+      <input type="submit" value="Log in!">
+    </form>
+
+    <h3> Or Sign Up for a nap stat! </h3>
+    <form action="/user" method="post">
+      <label for="name"> Name:
+      <input type="text" name="name">
+      <br>
+      <label for="username"> Username: 
+      <input type="text" name="username">
+      <br>
+      <label for="email"> Email:
+      <input type="text" name="email">
+      <br>
+      <label for="password"> Password:
+      <input type="password" name="password">
+      <br>
+      <label for="password_confirm"> Confirm Password: 
+      <input type="password" name="password_confirm">
+      <br>
+      <input type="submit" value="Sign up!">
+    </form> 
+  <% } %>
+
 
 </body>
 </html>

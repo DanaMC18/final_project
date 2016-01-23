@@ -64,19 +64,6 @@ function initMap() {
 }
 
 
-// db.napstrs.find(
-// {
-//   location: 
-//   { $near: 
-//     {
-//       $geometry: {type: 'Point', coordinates: [40.7411, -73.9897]},
-//       $minDistance: 0,
-//       $maxDistance: 1
-//     }
-//   }
-// })
-
-
 // $(document).ready(function(){
 
 // })

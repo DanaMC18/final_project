@@ -2,8 +2,11 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var session = require('express-session');
+var bcrypt = require('bcrypt');
+var MongoStore = require('connect-mongo')(session);
 
-//configuration
+//middleware configuration
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
@@ -24,6 +27,8 @@ MongoClient.connect(mongoUrl, function (err, database){
   // db.collection('napstrs').insert({
   //       name: 'Dana',
   //       username: 'DanaMC18',
+  //       email: 'DanaCzinsky@gmail.com',
+  //       password_digest: '',
   //       profilePic: 'http://cdn2.pitchfork.com/news/44784/4b25fb88.jpg',
   //       aboutMe: 'Looking for a dude to cuddle with',
   //       availability: true,
@@ -52,13 +57,42 @@ MongoClient.connect(mongoUrl, function (err, database){
   process.on('exit', db.close);
 });
 
-userLocation = []
+//log-in
+app.use(session({
+  secret: 'whispers',
+  store: new MongoStore({url: mongoUrl})
+}))
+
+var authenticateUser = function(username, password, callback) {
+  db.collection('napstrs').findOne({username: username}, function (err, data){
+    if (err) {throw err;}
+    bcrypt.compare(password, data.password_digest, function(err, passwordsMatch) {
+      if (passwordsMatch) {
+        callback(data);
+      } else {
+        callback(false);
+      }
+    })
+  })
+}
+
 
 //routes
 app.get('/', function (req, res){
-  res.render('index');
+  var username = req.session.username || false;
+  res.render('index', {username: username});
 })
 
+app.post('/login', function (req, res){
+  authenticateUser(req.body.username, req.body.password, function (user){
+    if (user) {
+      console.log(req.session);
+      req.session.username = user.username;
+      req.session.userId = user._id;
+    }
+    res.redirect('/');
+  })
+})
 
 app.get('/about', function (req, res){
   res.render('about');

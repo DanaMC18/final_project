@@ -14,10 +14,6 @@ function UsersController($http){
       ctrl.all = response.data;
     })
   }
-
-  ctrl.filter = function(){
-    
-  }
   
   ctrl.fetch();
 
