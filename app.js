@@ -6,13 +6,13 @@ var session = require('express-session');
 var bcrypt = require('bcrypt');
 var MongoStore = require('connect-mongo')(session);
 
-//middleware configuration
+//MIDDLEWARE CONFIG
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
-//db
+//DB
 var db;
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
@@ -57,7 +57,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   process.on('exit', db.close);
 });
 
-//log-in
+//SESSION/AUTHENTICATE SET UP
 app.use(session({
   secret: 'whispers',
   store: new MongoStore({url: mongoUrl})
@@ -77,21 +77,30 @@ var authenticateUser = function(username, password, callback) {
 }
 
 
-//routes
+//ROUTES
+
+//index, check if user is logged in and send username to index.ejs
 app.get('/', function (req, res){
   var username = req.session.username || false;
   res.render('index', {username: username});
 })
 
+//login existing user
 app.post('/login', function (req, res){
   authenticateUser(req.body.username, req.body.password, function (user){
     if (user) {
-      console.log(req.session);
       req.session.username = user.username;
       req.session.userId = user._id;
     }
-    res.redirect('/');
+    res.redirect('/search');
   })
+})
+
+//logout
+app.get('/logout', function (req, res){
+  req.session.username = null,
+  req.session.userId = null,
+  res.redirect('/');
 })
 
 app.get('/about', function (req, res){
