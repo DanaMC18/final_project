@@ -43,6 +43,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   // db.collection('napstrs').insert({
   //       name: 'Jon',
   //       username: 'JonnyCastle',
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG'
   //       profilePic: 'https://redlightnaps.files.wordpress.com/2007/05/dd20_img_13.jpg',
   //       aboutMe: 'I\'d never put you in the corner',
   //       availability: true,
@@ -129,9 +130,20 @@ app.post('/user', function (req, res){
         req.session.username = user.username;
         req.session.userId = user._id;
       }
-      res.redirect('/search')
+      res.redirect('/profiles/<%=req.session.userId%>')
     })
   }
+})
+
+
+// user profile
+app.get('/profiles/:id', function (req, res){
+  var username = req.session.username || false;
+
+  db.collection('napstrs').findOne({_id: ObjectId(req.params.id)}, function (err, data){
+    // console.log(data);
+    res.render('profile', {username: username, user: data});
+  })
 })
 
 
@@ -179,14 +191,17 @@ app.get('/users', function (req, res){
     //find logged in user
     db.collection('napstrs').findOne({_id: ObjectId(userId)},
       function (err, data){
+        var lat = parseFloat(data.location[0]);
+        var lng = parseFloat(data.location[1]);
+        var userLocation = [lat, lng];
        
-        // sort napstrs based on logged in user's geolocation and
+        // sort napstrs based on logged in user's geolocation as defined above and
         // send them back sorted to $http in fetch() in UsersController
         db.collection('napstrs').find({
           location: 
           { $near: 
             {
-              $geometry: {type: 'Point', coordinates: data.location},
+              $geometry: {type: 'Point', coordinates: userLocation},
               $minDistance: 0,
               $maxDistance: 16093
             }

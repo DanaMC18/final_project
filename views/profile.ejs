@@ -17,6 +17,8 @@
     <ul>
       <li> <a href="/"> napstr </a> </li>
       <li> | </li>
+      <li> <a href="/about"> About </a> </li>
+      <li> | </li>
       <% if (!username) { %>
         <li> <a href="/"> Login </a> </li>
         <li> | </li>
@@ -29,34 +31,37 @@
     </ul>
   </div> <!-- nav bar -->
 
-  <div id="map"> </div>
-
-  <script async defer src='https://maps.googleapis.com/maps/api/js?key=<%= napstrKey %>&callback=initMap'></script>
-
-
-  
-  <div ng-controller="UsersController as napstrs">
-    <h3> Welcome <%= username %> </h3>
-    <p> Search: <input ng-model="filterPref"></p>
-    <p> Filter:
-    <select ng-model="filterPref">
-      <option value="Big Spoon"> Big Spoon </option>
-      <option value="Little Spoon"> Little Spoon </option>
-      <option value="Side by Side"> Side by Side </option>
-    </select> </p>
-    <br>
-    
-    <h2> napstrs near you:</h2>
-    <div ng-repeat="napstr in napstrs.all | filter:filterPref">
-      <p> <strong> {{napstr.username}} </strong>
-        <br> <em>{{napstr.aboutMe}}</em>
-        <br> Rating: {{napstr.rating}}
-        <br> <a href="/profiles/{{napstr._id}}">Book Nap</a>
-      </p>
-    </div> <!--repeat -->
-  
-  </div> <!--controller -->
+  <h2> Welcome to napstr, <%= username %> </h2>
+  <div>
+    <img id="profile-pic" src="<%=user.profilePic%>">
+    <h3> <%=user.username %></h3>
+    <p> <strong>Name: </strong><%=user.name %></p>
+    <p> <strong>Email: </strong><%=user.email %></p>
+    <p> <strong>About: </strong><em><%=user.aboutMe %></em></p>
+    <p> <strong>Napping Preferences: </strong><%=user.napPreferences %></p>
+    <p> <strong>Nap Environment Preferences: </strong><%=user.evnPreferences %></p>
+    <p> <strong>Rating: </strong><%=user.rating %></p>
+    <p><strong>Reviews: </strong> </p>
+    <% user.reviews.forEach(function(review){ %>
+      <p><%=review.name%>: <%=review.content%></p>
+      <% }) %>
+    <p> <strong> Requests:</strong> </p>
+    <% user.requests.forEach(function(request){ %>
+      <p><%=request.name%></p>
+      <% }) %>
+  </div>
 
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

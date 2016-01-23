@@ -15,6 +15,13 @@ function UsersController($http){
     })
   }
   
+  // ctrl.find = function(userId){
+  //   $http.get('/users/' + userId).then(function (response){
+  //     console.log(response.data);
+  //   })
+  // }
+
+
   ctrl.fetch();
 
 }
