@@ -79,11 +79,13 @@ var authenticateUser = function(username, password, callback) {
 
 //ROUTES
 
+
 //index, check if user is logged in and send username to index.ejs
 app.get('/', function (req, res){
   var username = req.session.username || false;
   res.render('index', {username: username});
 })
+
 
 //login existing user
 app.post('/login', function (req, res){
@@ -96,12 +98,14 @@ app.post('/login', function (req, res){
   })
 })
 
+
 //logout
 app.get('/logout', function (req, res){
   req.session.username = null,
   req.session.userId = null,
   res.redirect('/');
 })
+
 
 //sign up
 app.post('/user', function (req, res){
@@ -130,6 +134,7 @@ app.post('/user', function (req, res){
   }
 })
 
+
 //about page
 app.get('/about', function (req, res){
   var username = req.session.username || false;
@@ -137,46 +142,66 @@ app.get('/about', function (req, res){
 })
 
 
-//search page render map and list of users next to map
+//search page: render map and list of users next to map
 app.get('/search', function (req, res){
   var username = req.session.username || false;
   res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY, username: username});
 })
 
+
 //renders users ON map, sets users's location
 app.post('/search', function (req, res){
-  // var lat = parseFloat(req.body.lat);
-  // var lng = parseFloat(req.body.lng);
-  // userLocation = [lat, lng];
-  // console.log(userLocation);
-  db.collection('napstrs').find({}).toArray(function (err, data){
-    res.json(data);
+  var userId = req.session.userId || false;
+  var lat = parseFloat(req.body.lat);
+  var lng = parseFloat(req.body.lng);
+  userLocation = [lat, lng];
+
+  //update users's location based on browser geolocation as defined above
+  db.collection('napstrs').update(
+    {_id: ObjectId(userId)},
+    {$set: {location: userLocation}},
+    function (err, data) {
+      // find all users and send them back to ajax call in main.js to plot on map
+      db.collection('napstrs').find({}).toArray(function (err, data){
+        res.json(data);
+      }) // end of finding all napstrs
+    }) // end of update
   })
-})
 
 
+//sort all napstrs based on user's geolocation
 app.get('/users', function (req, res){
-  // try setting the coordinates to current users's location
-
-
-  
-  db.collection('napstrs').find({
-    location: 
-    { $near: 
-      {
-        $geometry: {type: 'Point', coordinates: [40.7411, -73.9897]},
-        $minDistance: 0,
-        $maxDistance: 1000
-      }
-    }
-  }).toArray(function (err, data){
-    if (err) {
-      console.log(err)
-    } else {
-      res.json(data);
-    }
-  })
+  var userId = req.session.userId || false;
+ 
+  if (!userId) {
+    res.redirect('/'); // only logged in users can see search page
+  } else {
+    //find logged in user
+    db.collection('napstrs').findOne({_id: ObjectId(userId)},
+      function (err, data){
+       
+        // sort napstrs based on logged in user's geolocation and
+        // send them back sorted to $http in fetch() in UsersController
+        db.collection('napstrs').find({
+          location: 
+          { $near: 
+            {
+              $geometry: {type: 'Point', coordinates: data.location},
+              $minDistance: 0,
+              $maxDistance: 16093
+            }
+          }
+        }).toArray(function (err, data){
+          if (err) {
+            console.log(err)
+          } else {
+            res.json(data);
+          }
+        }) // end: sorting all napstrs
+      }) // end: finding logged-in napstr
+  } // end: first if/else
 })
+
 
 app.listen(process.env.PORT || 3000);
 
