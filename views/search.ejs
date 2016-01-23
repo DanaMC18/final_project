@@ -17,13 +17,15 @@
     <ul>
       <li> <a href="/"> napstr </a> </li>
       <li> | </li>
-      <li> <a href="/about"> About </a> </li>
-      <li> | </li>
-      <li> <a href="/search"> Search </a> </li>
-      <li> | </li>
-      <li> <a href="/"> Login </a> </li>
-      <li> | </li>
-      <li> <a href="/"> Sign Up</a> </li>
+      <% if (!username) { %>
+        <li> <a href="/"> Login </a> </li>
+        <li> | </li>
+        <li> <a href="/"> Sign Up</a> </li>
+      <% } else { %>
+        <li> <a href="/search"> Search </a> </li>
+        <li> | </li>
+        <li> <a href="/logout"> Logout </a> </li>
+      <% } %>
     </ul>
   </div> <!-- nav bar -->
 
@@ -31,10 +33,10 @@
 
   <script async defer src='https://maps.googleapis.com/maps/api/js?key=<%= napstrKey %>&callback=initMap'></script>
 
+
   
   <div ng-controller="UsersController as napstrs">
-    
-    <h2> napstrs near you:</h2>
+    <h3> Welcome <%= username %> </h3>
     <p> Search: <input ng-model="filterPref"></p>
     <p> Filter:
     <select ng-model="filterPref">
@@ -44,6 +46,7 @@
     </select> </p>
     <br>
     
+    <h2> napstrs near you:</h2>
     <div ng-repeat="napstr in napstrs.all | filter:filterPref">
       <p> <strong> {{napstr.username}} </strong>
         <br> <em>{{napstr.aboutMe}}</em>

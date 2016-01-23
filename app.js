@@ -103,16 +103,47 @@ app.get('/logout', function (req, res){
   res.redirect('/');
 })
 
+//sign up
+app.post('/user', function (req, res){
+  if (req.body.password = req.body.password_confirm) {
+    var name = req.body.name;
+    var username = req.body.username;
+    var email = req.body.email;
+    var password = bcrpt.hashSync(req.body.password, 8);
+    
+    db.collection('napstrs').insert({
+      name: name, 
+      username: username, 
+      email: email, 
+      password: password
+    }, function (err, data){
+      console.log('result');
+    })
+
+    authenticateUser(req.body.username, req.body.password, function (user){
+      if (user) {
+        req.session.username = user.username;
+        req.session.userId = user._id;
+      }
+      res.redirect('/search')
+    })
+  }
+})
+
+//about page
 app.get('/about', function (req, res){
-  res.render('about');
+  var username = req.session.username || false;
+  res.render('about', {username: username});
 })
 
 
+//search page render map and list of users next to map
 app.get('/search', function (req, res){
-  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY});
+  var username = req.session.username || false;
+  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY, username: username});
 })
 
-
+//renders users ON map, sets users's location
 app.post('/search', function (req, res){
   // var lat = parseFloat(req.body.lat);
   // var lng = parseFloat(req.body.lng);
@@ -126,6 +157,9 @@ app.post('/search', function (req, res){
 
 app.get('/users', function (req, res){
   // try setting the coordinates to current users's location
+
+
+  
   db.collection('napstrs').find({
     location: 
     { $near: 

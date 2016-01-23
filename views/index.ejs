@@ -19,13 +19,17 @@
       <li> | </li>
       <li> <a href="/about"> About </a> </li>
       <li> | </li>
-      <li> <a href="/search"> Search </a> </li>
-      <li> | </li>
-      <li> <a href="/"> Login </a> </li>
-      <li> | </li>
-      <li> <a href="/"> Sign Up</a> </li>
+      <% if (!username) { %>
+        <li> <a href="/"> Login </a> </li>
+        <li> | </li>
+        <li> <a href="/"> Sign Up</a> </li>
+      <% } else { %>
+        <li> <a href="/search"> Search </a> </li>
+        <li> | </li>
+        <li> <a href="/logout"> Logout </a> </li>
+      <% } %>
     </ul>
-  </div> <!-- nav bar -->
+    </div> <!-- nav bar -->
 
   <h1>Napstr</h1>
   <h3>It's only creepy if you think about it.</h3>
