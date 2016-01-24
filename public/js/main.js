@@ -1,11 +1,20 @@
 console.log('zzzz');
 
 function initMap() {
+
+  var customMapType = new google.maps.StyledMapType(
+    [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#b5cbe4"}]},{"featureType":"landscape","stylers":[{"color":"#efefef"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#83a5b0"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#bdcdd3"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e3eed3"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}])
+    var customMapTypeId = 'custom_style';
+
   var map = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: 40.5860, lng: -73.6678},
-  scrollwheel: false,
-  zoom: 15
-  });
+    center: {lat: 40.5860, lng: -73.6678},
+    scrollwheel: false,
+    zoom: 15,
+    mapTypeControleOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]}
+    });
+
+  map.mapTypes.set(customMapTypeId, customMapType);
+  map.setMapTypeId(customMapTypeId);
 
 
   var displayPosition = function(position) {
@@ -82,14 +91,26 @@ function initMap() {
 
 $(document).ready(function(){
 
+  var $signupBtn = $('#signup-btn');
+  var $closeSignupBtn = $('#close-signup');
+  var $signupModal = $('#signup-modal-container');
+
   var $editBtn = $('#edit-btn');
   var $closeEditBtn = $('#close-edit');
   var $editModal = $('#edit-modal-container');
+
+  var toggleSignupContainer = function(event) {
+    event.preventDefault();
+    $signupModal.toggle();
+  }
 
   var toggleEditContainer = function(event) {
     event.preventDefault();
     $editModal.toggle();
   }
+
+  $signupBtn.click(toggleSignupContainer);
+  $closeSignupBtn.click(toggleSignupContainer);
 
   $editBtn.click(toggleEditContainer);
   $closeEditBtn.click(toggleEditContainer);

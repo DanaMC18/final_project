@@ -36,7 +36,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   //       rating: 3,
   //       location: {type: 'Point', coordinates: [40.7411, -73.9897]},
   //       napPreferences: ['little spoon'],
-  //       evnPreferences: ['dark', 'quiet'],
+  //       envPreferences: ['dark', 'quiet'],
   //       reviews: [{name: 'Jon', content: 'would nap again'}],
   //       requests: [{name: 'Jon', pending: true, confirmed: false, denied: false, date: '2016-01-21'}]
   //     });
@@ -44,7 +44,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   // db.collection('napstrs').insert({
   //       name: 'Jon',
   //       username: 'JonnyCastle',
-  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG'
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
   //       profilePic: 'https://redlightnaps.files.wordpress.com/2007/05/dd20_img_13.jpg',
   //       aboutMe: 'I\'d never put you in the corner',
   //       availability: true,
@@ -84,8 +84,8 @@ var authenticateUser = function(username, password, callback) {
 
 //index, check if user is logged in and send username to index.ejs
 app.get('/', function (req, res){
-  var username = req.session.username || false;
-  res.render('index', {username: username});
+  var userId = req.session.userId || false;
+  res.render('index', {userId: userId});
 })
 
 
@@ -186,7 +186,8 @@ app.get('/about', function (req, res){
 //search page: render map and list of users next to map
 app.get('/search', function (req, res){
   var username = req.session.username || false;
-  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY, username: username});
+  var userId = req.session.userId || false;
+  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY, username: username, userId: userId});
 })
 
 
@@ -233,6 +234,7 @@ app.get('/users', function (req, res){
               $geometry: {type: 'Point', coordinates: userLocation},
               $minDistance: 0,
               $maxDistance: 16093
+              // $maxDistance: 100000
             }
           }
         }).toArray(function (err, data){

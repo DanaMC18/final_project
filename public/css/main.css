@@ -13,6 +13,7 @@ html, body {
   height: 100%;
   width: 50%;
   float: left;
+  border: 1px solid lightgrey;
 }
 
 #profile-pic {
@@ -20,6 +21,7 @@ html, body {
   float: left;
 }
 
+#signup-modal-container,
 #edit-modal-container {
   display: none;
   position: fixed;
@@ -31,6 +33,7 @@ html, body {
   z-index: 1000;
 }
 
+#signup-modal,
 #edit-modal {
   position: relative;
   background-position: center;
