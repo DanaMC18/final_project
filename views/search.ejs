@@ -46,6 +46,17 @@
     </select> </p>
     <br>
     
+    <form>
+      <input type="range" name="distance" min="0" max="1000" value="10" onchange="showValue(this.value)">
+    </form>
+    <span id="range">10 miles </span>
+    <script type="text/javascript">
+      function showValue(newValue) {
+        document.getElementById('range').innerHTML=(newValue + ' miles');
+      }
+    </script>
+
+
     <h2> napstrs near you:</h2>
     <div ng-repeat="napstr in napstrs.all | filter:filterPref">
       <p> <strong> {{napstr.username}} </strong>

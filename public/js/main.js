@@ -31,8 +31,9 @@ function initMap() {
       data: pos
     }).done(function(response){
       response.forEach(function(napstr){
-        var lat = parseFloat(napstr.location.coordinates[0]);
-        var lng = parseFloat(napstr.location.coordinates[1]);
+        //had napstr.location.coordinates[0] for some reason at some point?
+        var lat = parseFloat(napstr.location[0]);
+        var lng = parseFloat(napstr.location[1]);
         var napstrPos = {'lat': lat, 'lng': lng}
         new google.maps.Marker({
           position: napstrPos,
@@ -40,7 +41,6 @@ function initMap() {
           icon: zzz
         });
       })
-      // console.log(response)
     })
 
   }
