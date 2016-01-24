@@ -94,8 +94,10 @@ app.post('/login', function (req, res){
     if (user) {
       req.session.username = user.username;
       req.session.userId = user._id;
+      res.redirect('/search');
+    } else {
+      res.redirect('/');
     }
-    res.redirect('/search');
   })
 })
 
@@ -109,28 +111,28 @@ app.get('/logout', function (req, res){
 
 
 //sign up
-app.post('/user', function (req, res){
-  if (req.body.password = req.body.password_confirm) {
+app.post('/user', function (req, res) {
+  if (req.body.password === req.body.password_confirm) {
     var name = req.body.name;
     var username = req.body.username;
     var email = req.body.email;
-    var password = bcrpt.hashSync(req.body.password, 8);
+    var password = bcrypt.hashSync(req.body.password, 8);
     
     db.collection('napstrs').insert({
       name: name, 
       username: username, 
       email: email, 
-      password: password
-    }, function (err, data){
-      console.log('result');
-    })
+      password_digest: password
+    }, function (err, data) {
+      // console.log(data); 
+    });
 
-    authenticateUser(req.body.username, req.body.password, function (user){
+    authenticateUser(username, req.body.password, function (user) {
       if (user) {
         req.session.username = user.username;
         req.session.userId = user._id;
+        res.redirect('/profiles/' + req.session.userId);
       }
-      res.redirect('/profiles/<%=req.session.userId%>')
     })
   }
 })
@@ -139,10 +141,9 @@ app.post('/user', function (req, res){
 // user profile
 app.get('/profiles/:id', function (req, res){
   var username = req.session.username || false;
-
+  var userId = req.session.userId || false;
   db.collection('napstrs').findOne({_id: ObjectId(req.params.id)}, function (err, data){
-    // console.log(data);
-    res.render('profile', {username: username, user: data});
+    res.render('profile', {username: username, userId: userId, user: data});
   })
 })
 
@@ -177,8 +178,8 @@ app.post('/search', function (req, res){
       db.collection('napstrs').find({}).toArray(function (err, data){
         res.json(data);
       }) // end of finding all napstrs
-    }) // end of update
-  })
+  }) // end of update
+})
 
 
 //sort all napstrs based on user's geolocation
