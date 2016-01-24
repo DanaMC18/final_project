@@ -59,7 +59,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   process.on('exit', db.close);
 });
 
-//SESSION/AUTHENTICATE SET UP
+//SESSION & AUTHENTICATE SET UP
 app.use(session({
   secret: 'whispers',
   store: new MongoStore({url: mongoUrl})

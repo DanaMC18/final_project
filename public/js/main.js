@@ -6,15 +6,12 @@ function initMap() {
   scrollwheel: false,
   zoom: 15
   });
-  // var infoWindow = new google.maps.InfoWindow({map: map});
+
 
   var displayPosition = function(position) {
     console.log('Latitude: ' + position.coords.latitude + ', Longitude: ' + position.coords.longitude);
     console.log(watchID);
     var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-
-    // infoWindow.setPosition(pos);
-    // infoWindow.setContent('You are here.');
     map.setCenter(pos);
 
     var zzz = 'imgs/zzz.png';
@@ -35,11 +32,30 @@ function initMap() {
         var lat = parseFloat(napstr.location[0]);
         var lng = parseFloat(napstr.location[1]);
         var napstrPos = {'lat': lat, 'lng': lng}
-        new google.maps.Marker({
+        var newNapMarker = new google.maps.Marker({
           position: napstrPos,
           map: map,
           icon: zzz
         });
+
+        var contentString = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1>' + napstr.username + '</h1>' +
+        '<p> <em>' + napstr.aboutMe + '</em> </p>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+
+        var infoWindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        newNapMarker.addListener('click', function(){
+          infowindow.open(map, newNapMarker);
+        })
       })
     })
 
