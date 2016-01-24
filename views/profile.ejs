@@ -63,6 +63,10 @@
 
     <% if (user._id == userId) { %> 
       <a id="edit-btn" href="#">Edit</a>
+      <br>
+      <form action="/profiles/<%=user._id%>?_method=delete" method="post">
+        <input type="submit" value="Delete Profile">
+      </form>
     <% } %>
   </div>
 

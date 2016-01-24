@@ -105,8 +105,8 @@ app.post('/login', function (req, res){
 
 //logout
 app.get('/logout', function (req, res){
-  req.session.username = null,
-  req.session.userId = null,
+  req.session.username = null;
+  req.session.userId = null;
   res.redirect('/');
 })
 
@@ -163,6 +163,16 @@ app.patch('/profiles/:id', function (req, res){
     function (err, data) {
       res.redirect('/profiles/' + req.params.id)  
     })
+})
+
+
+//delete user
+app.delete('/profiles/:id', function (req, res){
+  db.collection('napstrs').remove({_id: ObjectId(req.params.id)}, function (err, data){
+    req.session.username = null;
+    req.session.userId = null;
+    res.redirect('/');
+  })
 })
 
 
