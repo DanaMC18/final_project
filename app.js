@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
+app.use(methodOverride('_method'))
 
 //DB
 var db;
@@ -126,7 +127,7 @@ app.post('/user', function (req, res) {
     }, function (err, data) {
       // console.log(data); 
     });
-
+    //log in new user and redirect them to their profile page
     authenticateUser(username, req.body.password, function (user) {
       if (user) {
         req.session.username = user.username;
@@ -145,6 +146,23 @@ app.get('/profiles/:id', function (req, res){
   db.collection('napstrs').findOne({_id: ObjectId(req.params.id)}, function (err, data){
     res.render('profile', {username: username, userId: userId, user: data});
   })
+})
+
+
+// edit user profile
+app.patch('/profiles/:id', function (req, res){
+  db.collection('napstrs').update({_id: ObjectId(req.params.id)},
+    {$set: {
+            name: req.body.name, 
+            username: req.body.username,
+            email: req.body.email,
+            profilePic: req.body.profilePic,
+            aboutMe: req.body.aboutMe,
+            napPreferences: req.body.napPref,
+            envPreferences: req.body.envPref}},
+    function (err, data) {
+      res.redirect('/profiles/' + req.params.id)  
+    })
 })
 
 

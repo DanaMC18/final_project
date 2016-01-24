@@ -44,7 +44,7 @@
     <p> <strong>Email: </strong><%=user.email %></p>
     <p> <strong>About: </strong><em><%=user.aboutMe %></em></p>
     <p> <strong>Napping Preferences: </strong><%=user.napPreferences %></p>
-    <p> <strong>Nap Environment Preferences: </strong><%=user.evnPreferences %></p>
+    <p> <strong>Nap Environment Preferences: </strong><%=user.envPreferences %></p>
     <p> <strong>Rating: </strong><%=user.rating %></p>
     
     <p> <strong>Reviews: </strong> </p>
@@ -62,8 +62,53 @@
     <% } %>
 
     <% if (user._id == userId) { %> 
-      <a href="/profiles/<%=user._id%>/edit">Edit</a>
+      <a id="edit-btn" href="#">Edit</a>
     <% } %>
+  </div>
+
+  <div id="edit-modal-container">
+    <div id="edit-modal">
+      <a id="close-edit" href="#"> Close </a>
+      <h3> Edit your Profile: </h3>
+      <form action="/profiles/<%=user._id%>?_method=patch" method="post">
+      <label for="name"> Name: </label>
+      <input type="text" name="name" value="<%=user.name%>">
+      <br>
+      <label for="username"> Username: </label>
+      <input type="text" name="username" value="<%=user.username%>">
+      <br>
+      <label for="email"> Email: </label>
+      <input type="text" name="email" value="<%=user.email%>">
+      <br>
+      <label for="profilePic"> Profile Picture URL: </label>
+      <input type="text" name="profilePic" value="<%=user.profilePic%>">
+      <br>
+      <label for="name"> About: </label>
+      <br>
+      <textarea name="aboutMe" rows="2" cols="50"> <%=user.aboutMe %> </textarea>
+      <br>
+      <label for="napPreferences"> Napping Preferences (you prefer being): </label>
+      <br>
+      <input type="checkbox" name="napPref" value="BigSpoon"> Big Spoon 
+      <input type="checkbox" name="napPref" value="LittleSpoon"> Little Spoon 
+      <input type="checkbox" name="napPref" value="Side By Side"> Side by Side
+      <input type="checkbox" name="napPref" value="Sea Ottering"> Sea Ottering
+      <br>
+      <label for="envPreferences"> Your napping environmental prefereneces: </label>
+      <br>
+      <input type="checkbox" name="evnPref" value="Darkness"> Darkness
+      <input type="checkbox" name="evnPref" value="NightLight"> Night Light
+      <input type="checkbox" name="evnPref" value="Silence"> Silence
+      <input type="checkbox" name="evnPref" value="TV/Music On"> TV/Music On
+      <br>
+      <input type="checkbox" name="evnPref" value="Ambient Noise"> Ambient Noise
+      <input type="checkbox" name="evnPref" value="Top Bunk"> Top Bunk
+      <input type="checkbox" name="evnPref" value="Bottom Bunk"> Bottom Bunk
+      <br>
+      <input type="submit" value="Update Profile">
+      </form>
+
+    </div>
   </div>
 
 

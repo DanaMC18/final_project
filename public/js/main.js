@@ -64,7 +64,39 @@ function initMap() {
 }
 
 
-// $(document).ready(function(){
+$(document).ready(function(){
 
-// })
+  var $editBtn = $('#edit-btn');
+  var $closeEditBtn = $('#close-edit');
+  var $editModal = $('#edit-modal-container');
+
+  var toggleEditContainer = function(event) {
+    event.preventDefault();
+    $editModal.toggle();
+  }
+
+  $editBtn.click(toggleEditContainer);
+  $closeEditBtn.click(toggleEditContainer);
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

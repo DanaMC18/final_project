@@ -39,7 +39,6 @@ Document:
   password_digest: 'string',
   profilePic: 'string',
   aboutMe: 'string',
-  address: 'string',
   availability: boolean,
   rating: integer (out of 3),
   location: [lat (integer), lng (integer)],
