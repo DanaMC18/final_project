@@ -249,13 +249,15 @@ app.get('/users', function (req, res){
 })
 
 
+//user requests a nap with a napstr
 app.post('/requests/:id/create', function (req, res){
   var username = req.session.username || false;
   var newRequest = {
     name: username, 
     pending: true,
     confirmed: false,
-    denied: false};
+    denied: false,
+    date: new Date()};
 
   db.collection('napstrs').update({_id: ObjectId(req.params.id)},
     {$addToSet: {requests: newRequest}}, 
@@ -264,6 +266,23 @@ app.post('/requests/:id/create', function (req, res){
   })
 })
 
+
+//when a user confirms a request
+//DOESN'T WORK
+app.post('/requests/:id/confirm', function (req, res) {
+  console.log(req.body.name);
+  db.collection('napstrs').update({_id: ObjectId(req.params.id), 'requests.name': req.body.name},
+    {$set: {
+          name: req.body.name, 
+          pending: false, 
+          confirmed: true, 
+          denied: false,
+          date: new Date()}},
+    function (err, data){
+      console.log(data);
+      res.redirect('/profiles/' + req.params.id) 
+    })
+})
 
 
 app.listen(process.env.PORT || 3000);

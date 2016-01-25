@@ -49,7 +49,8 @@ Document:
   requests: [{name: String, 
             pending: Boolean, 
             confirmed: Boolean, 
-            denied: Boolean}]
+            denied: Boolean,
+            date: String}]
   ]
 ```
 

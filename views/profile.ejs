@@ -54,12 +54,12 @@
 
   <h2 id="welcome"><%= username %>'s Profile </h2>
   
-  <div id="profile-container" class="container">
+  <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <img class="img-fluid img-thumbnail" src="<%=user.profilePic%>">
+        <img class="img-fluid img-profile-thumb" src="<%=user.profilePic%>">
       </div>
-      <div class="col-md-6">
+      <div id="profile-container" class="col-md-6 col-md-offset-2">
           <h3> <%=user.username %> <%userId%></h3>
           <p> <strong>Name: </strong><%=user.name %></p>
           <p> <strong>Email: </strong><%=user.email %></p>
@@ -75,25 +75,62 @@
               <% }) %>
           <% } %>
 
-          <p> <strong> Requests:</strong> </p>
-          <% if (user.requests) { %>
-            <% user.requests.forEach(function(request){ %>
-              <p><%=request.name%></p>
-              <% }) %>
-          <% } %>
-
           <% if (user._id == userId) { %> 
-            <a id="edit-btn" class="btn btn-info" href="#">Edit</a>
-            <form action="/profiles/<%=user._id%>?_method=delete" method="post">
-              <input type="submit" class="btn btn-info" value="Delete Profile">
-            </form>
-          <% } else { %>
-            <!--  <button class="btn btn-info" ng-click="napstrs.book(napstr)">Request a Nap </button> -->
-          <% } %>
+              <a id="edit-btn" class="btn btn-info" href="#">Edit</a>
+            <div class="delete-btns">
+              <form action="/profiles/<%=user._id%>?_method=delete" method="post">
+                <input type="submit" class="btn btn-info" value="Delete Profile">
+              </form>
+            </div>
 
-      </div>
+            <div class="requests-container">
+              <h4> Requests: </h4>
+              <% if (user.requests) { %>
+                
+                <% user.requests.forEach(function(request){ %>
+                  
+                  <% if (request.pending) { %>
+                    
+                    <h5> Pending: </h5>
+                      <p> <strong> <%=request.name%>: </strong>
+                        <%= request.date %>
+                        <form id="confirm-form" action="/requests/<%=userId%>/confirm">
+                          <input type="hidden" name="requstorName" value="<%=request.name%>">
+                          <input type="hidden" name="requestDate" value="<%=request.date%>">
+                          <input type="hidden" name="userId" value="<%=userId%>">
+                          <a>Confirm Nap</a>
+                        </form>
+
+                        <a id="deny-btn" href="#">Deny Nap</a>
+                      </p>
+
+                  <% } else if (request.confirmed) { %>
+                    
+                    <h5> Confirmed: </h5>
+                      <p> <strong> <%= request.name %></strong> 
+                        <%= request.date %>
+                      </p>
+
+                  <% } else if (request.denied) { %>
+                    <h5> Denied: </h5>
+                      <p> <strong> <%= request.name %> </strong>
+                        <%= request.date %>
+                      </p>
+
+                  <% } %> <!-- /. if/else pending, confirmed, denied -->
+
+                <% }) %> <!-- /. forEach -->
+              <% } %> <!-- /. if/else (user.requests) -->
+
+            </div> <!-- /. requests-container -->
+          <% } %> <!--/. if/else (user._id == userId) -->
+
+
+      </div> <!-- /. profile-container -->
     </div> <!-- /. row -->
-  </div> <!-- /. container -->
+
+
+  </div> <!-- /. grid-container -->
 
 
 
@@ -169,7 +206,7 @@
             <input type="checkbox" name="envPref" value="Ambient Noise"> Ambient Noise
           </label>
         </div>
-        <input type="submit" class="btn btn-default" value="Update Profile">
+        <input type="submit" class="btn btn-info" value="Update Profile">
       </form>
     </div>
   </div>

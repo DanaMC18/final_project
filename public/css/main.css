@@ -45,12 +45,31 @@ html, body {
 }
 
 #profile-container {
-  margin: 0 auto;
+ /* margin: 0 auto;
   display: block;
-  width: 85%;
+  width: 85%;*/
   background-color: #fffbf0;
   border: 1px solid lightgrey;
   padding: 2%;
+}
+
+.requests-container {
+  background: honeydew;
+  border-top: 1px solid lightgrey;
+  margin-top: 1em;
+  padding: 1%;
+}
+
+.delete-btns {
+  float: right;
+}
+
+.img-profile-thumb {
+  max-width: 500px;
+  max-height: 500px;
+  /*background: #52BCDC;*/
+  background: #EEEEEE;
+  padding: 3%;
 }
 
 .panel, #right-of-map {
