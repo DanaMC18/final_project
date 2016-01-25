@@ -61,7 +61,7 @@
       </div>
       
       <div id="profile-container" class="col-md-6 col-md-offset-2">
-          <h3> <%=user.username %> <%userId%></h3>
+          <h3> Info: </h3>
           <p> <strong>Name: </strong><%=user.name %></p>
           <p> <strong>Email: </strong><%=user.email %></p>
           <p> <strong>About: </strong><em><%=user.aboutMe %></em></p>
@@ -89,31 +89,35 @@
                   
                   <% if (request.pending) { %>
                     
-                    <h5> Pending: </h5>
-                      <p> <strong> <%=request.name%>: </strong>
-                        <%= request.date %>
-                        <form id="confirm-form" action="/requests/<%=userId%>/confirm">
-                          <input type="hidden" name="requstorName" value="<%=request.name%>">
-                          <input type="hidden" name="requestDate" value="<%=request.date%>">
-                          <input type="hidden" name="userId" value="<%=userId%>">
-                          <a>Confirm Nap</a>
-                        </form>
+                    <div class="pending-requests">
+                      <h5> Pending: </h5>
+                        <p> <strong> <%=request.name%>: </strong>
+                          <%= request.date %>
+                          <form id="confirm-form" action="/requests/<%=userId %>/confirm">
+                            <input type="hidden" name="requstorName" value="<%=request.name%>">
+                            <input type="hidden" name="requestDate" value="<%=request.date%>">
+                            <input type="hidden" name="userId" value="<%=userId%>">
+                            <a>Confirm Nap</a>
+                          </form>
 
-                        <a id="deny-btn" href="#">Deny Nap</a>
-                      </p>
+                          <form id="deny-form" action="/requests/<%=userId %>/deny">
+                            <input type="hidden" name="requstorName" value="<%=request.name%>">
+                            <input type="hidden" name="requestDate" value="<%=request.date%>">
+                            <input type="hidden" name="userId" value="<%=userId%>">
+                            <a>Deny Nap</a>
+                          </form>
+
+                        </p>
+                      </div>
 
                   <% } else if (request.confirmed) { %>
                     
-                    <h5> Confirmed: </h5>
+                    <div class="confirmed-requests">
+                      <h5> Confirmed: </h5>
                       <p> <strong> <%= request.name %></strong> 
                         <%= request.date %>
                       </p>
-
-                  <% } else if (request.denied) { %>
-                    <h5> Denied: </h5>
-                      <p> <strong> <%= request.name %> </strong>
-                        <%= request.date %>
-                      </p>
+                    </div>
 
                   <% } %> <!-- /. if/else pending, confirmed, denied -->
                 <% }) %> <!-- /. forEach -->

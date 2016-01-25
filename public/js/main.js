@@ -118,18 +118,34 @@ $(document).ready(function(){
 
   $('#confirm-form').click(function(){
     event.preventDefault();
-    var userId = $('#confirm-form').serializeArray()[2].value;
     var requestor = $('#confirm-form').serializeArray()[0].value;
     var requestDate = $('#confirm-form').serializeArray()[1].value;
+    var userId = $('#confirm-form').serializeArray()[2].value;
     var request = {name: requestor, date: requestDate};
     $.ajax({
       url: '/requests/' + userId + '/confirm',
       type: 'post',
       dataType: 'JSON',
       data: request
-    }).done(function(response){})
+    }).done(function(response){
 
-    });
+    })});
+
+  $('#deny-form').click(function(){
+    event.preventDefault();
+    var requestor = $('#deny-form').serializeArray()[0].value;
+    var requestDate = $('#deny-form').serializeArray()[1].value;
+    var userId = $('#deny-form').serializeArray()[2].value;
+    var request = {name: requestor, date: requestDate};
+    $.ajax({
+      url: '/requests/' + userId + '/deny',
+      type: 'post',
+      dataType: 'JSON',
+      data: request
+    }).done(function(response){
+      
+    })});
+
 
 })
 

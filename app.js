@@ -187,7 +187,11 @@ app.get('/about', function (req, res){
 app.get('/search', function (req, res){
   var username = req.session.username || false;
   var userId = req.session.userId || false;
-  res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY, username: username, userId: userId});
+  if (userId) {
+    res.render('search', {napstrKey: process.env.NAPSTR_MAP_KEY, username: username, userId: userId});  
+  } else {
+    res.redirect('/');
+  }
 })
 
 
@@ -268,12 +272,21 @@ app.post('/requests/:id/create', function (req, res){
 
 //when a user confirms a request
 app.post('/requests/:id/confirm', function (req, res) {
-  console.log(req.body.name);
-
-  db.collection('napstrs').update({_id: ObjectId(req.params.id), 'requests.name': req.body.name},
+  db.collection('napstrs').update({_id: ObjectId(req.params.id), 'requests.name': req.body.name, 'requests.date': req.body.date},
     {$set: {'requests.$.pending': false, 'requests.$.confirmed': true}},
     function (err, data){
-      console.log(data);
+      res.redirect('/profiles/' + req.params.id)
+    })
+})
+
+
+//when a user denies a request: just deletes the request all together
+app.post('/requests/:id/deny', function (req, res) {
+  console.log(req.body);
+  db.collection('napsters').update({_id: ObjectId(req.params.id)},
+    {$pull: {requests: {name: req.body.name, date: req.body.date}}},
+    function (err, data) {
+      res.redirect('/profiles/' + req.params.id)
     })
 })
 
