@@ -196,7 +196,7 @@ app.post('/search', function (req, res){
   var userId = req.session.userId || false;
   var lat = parseFloat(req.body.lat);
   var lng = parseFloat(req.body.lng);
-  userLocation = [lat, lng];
+  userLocation = {type: 'Point', coordinates: [lat, lng]};
 
   //update users's location based on browser geolocation as defined above
   db.collection('napstrs').update(
@@ -221,8 +221,8 @@ app.get('/users', function (req, res){
     //find logged in user
     db.collection('napstrs').findOne({_id: ObjectId(userId)},
       function (err, data){
-        var lat = parseFloat(data.location[0]);
-        var lng = parseFloat(data.location[1]);
+        var lat = parseFloat(data.location.coordinates[0]);
+        var lng = parseFloat(data.location.coordinates[1]);
         var userLocation = [lat, lng];
        
         // sort napstrs based on logged in user's geolocation as defined above and
