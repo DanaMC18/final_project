@@ -52,85 +52,123 @@
     </div> <!-- /.container-fluid -->
   </nav>
 
-  <h2> Welcome to napstr, <%= username %> </h2>
-  <div>
-    <img id="profile-pic" src="<%=user.profilePic%>">
-  </div>
+  <h2 id="welcome"><%= username %>'s Profile </h2>
   
-  <div>
-    <h3> <%=user.username %> <%userId%></h3>
-    <p> <strong>Name: </strong><%=user.name %></p>
-    <p> <strong>Email: </strong><%=user.email %></p>
-    <p> <strong>About: </strong><em><%=user.aboutMe %></em></p>
-    <p> <strong>Napping Preferences: </strong><%=user.napPreferences %></p>
-    <p> <strong>Nap Environment Preferences: </strong><%=user.envPreferences %></p>
-    <p> <strong>Rating: </strong><%=user.rating %></p>
-    
-    <p> <strong>Reviews: </strong> </p>
-    <% if (user.reviews) { %>
-      <% user.reviews.forEach(function(review){ %>
-        <p><%=review.name%>: <%=review.content%></p>
-        <% }) %>
-    <% } %>
+  <div id="profile-container" class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img id="profile-pic" class="img-fluid img-thumbnail" src="<%=user.profilePic%>">
+      </div>
+      <div class="col-md-6">
+          <h3> <%=user.username %> <%userId%></h3>
+          <p> <strong>Name: </strong><%=user.name %></p>
+          <p> <strong>Email: </strong><%=user.email %></p>
+          <p> <strong>About: </strong><em><%=user.aboutMe %></em></p>
+          <p> <strong>Napping Preferences: </strong><%=user.napPreferences %></p>
+          <p> <strong>Nap Environment Preferences: </strong><%=user.envPreferences %></p>
+          <p> <strong>Rating: </strong><%=user.rating %></p>
+          
+          <p> <strong>Reviews: </strong> </p>
+          <% if (user.reviews) { %>
+            <% user.reviews.forEach(function(review){ %>
+              <p><%=review.name%>: <%=review.content%></p>
+              <% }) %>
+          <% } %>
 
-    <p> <strong> Requests:</strong> </p>
-    <% if (user.requests) { %>
-      <% user.requests.forEach(function(request){ %>
-        <p><%=request.name%></p>
-        <% }) %>
-    <% } %>
+          <p> <strong> Requests:</strong> </p>
+          <% if (user.requests) { %>
+            <% user.requests.forEach(function(request){ %>
+              <p><%=request.name%></p>
+              <% }) %>
+          <% } %>
 
-    <% if (user._id == userId) { %> 
-      <a id="edit-btn" href="#">Edit</a>
-      <br>
-      <form action="/profiles/<%=user._id%>?_method=delete" method="post">
-        <input type="submit" value="Delete Profile">
-      </form>
-    <% } %>
-  </div>
+          <% if (user._id == userId) { %> 
+            <a id="edit-btn" class="btn btn-info" href="#">Edit</a>
+            <form action="/profiles/<%=user._id%>?_method=delete" method="post">
+              <input type="submit" class="btn btn-info" value="Delete Profile">
+            </form>
+          <% } %>
+
+      </div>
+    </div> <!-- /. row -->
+  </div> <!-- /. container -->
+
+
 
   <div id="edit-modal-container">
     <div id="edit-modal">
       <button id="close-edit" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h3> Edit your Profile: </h3>
       <form action="/profiles/<%=user._id%>?_method=patch" method="post">
-      <label for="name"> Name: </label>
-      <input type="text" name="name" value="<%=user.name%>">
-      <br>
-      <label for="username"> Username: </label>
-      <input type="text" name="username" value="<%=user.username%>">
-      <br>
-      <label for="email"> Email: </label>
-      <input type="text" name="email" value="<%=user.email%>">
-      <br>
-      <label for="profilePic"> Profile Picture URL: </label>
-      <input type="text" name="profilePic" value="<%=user.profilePic%>">
-      <br>
-      <label for="name"> About: </label>
-      <br>
-      <textarea name="aboutMe" rows="2" cols="50"> <%=user.aboutMe %> </textarea>
-      <br>
-      <label for="napPreferences"> Napping Preferences (you prefer being): </label>
-      <br>
-      <input type="checkbox" name="napPref" value="BigSpoon"> Big Spoon 
-      <input type="checkbox" name="napPref" value="LittleSpoon"> Little Spoon 
-      <input type="checkbox" name="napPref" value="Side By Side"> Side by Side
-      <input type="checkbox" name="napPref" value="Sea Ottering"> Sea Ottering
-      <br>
-      <label for="envPreferences"> Your napping environmental prefereneces: </label>
-      <br>
-      <input type="checkbox" name="evnPref" value="Darkness"> Darkness
-      <input type="checkbox" name="evnPref" value="NightLight"> Night Light
-      <input type="checkbox" name="evnPref" value="Silence"> Silence
-      <input type="checkbox" name="evnPref" value="TV/Music On"> TV/Music On
-      <br>
-      <input type="checkbox" name="evnPref" value="Ambient Noise"> Ambient Noise
-      <input type="checkbox" name="evnPref" value="Top Bunk"> Top Bunk
-      <input type="checkbox" name="evnPref" value="Bottom Bunk"> Bottom Bunk
-      <br>
-      <input type="submit" value="Update Profile">
+        <div class="form-group">
+          <label for="name"> Name: </label>
+          <input type="text" name="name" class="form-control"value="<%=user.name%>">
+        </div>
+        <!-- <br> -->
+        <div class="form-group">
+          <label for="username"> Username: </label>
+          <input type="text" name="username" class="form-control" value="<%=user.username%>">
+        </div>
+        <!-- <br> -->
+        <div class="form-group">
+          <label for="email"> Email: </label>
+          <input type="text" name="email" class="form-control" value="<%=user.email%>">
+        </div>
+        <!-- <br> -->
+        <div class="form-group">
+          <label for="profilePic"> Profile Picture URL: </label>
+          <input type="text" name="profilePic" class="form-control" value="<%=user.profilePic%>">
+        </div>
+        <!-- <br> -->
+        <div class="form-group">
+          <label for="name"> About: </label>
+          <textarea name="aboutMe" class="form-control" rows="2" cols="50"> <%=user.aboutMe %> </textarea>
+        </div>
+        <!-- <br> -->
+        <label for="napPreferences"> Napping Preferences (you prefer being): </label>
+        <!-- <br> -->
+        <div class="checkbox">
+          <label class="checkbox-inline">
+            <input type="checkbox" name="napPref" value="Big Spoon"> Big Spoon 
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="napPref" value="Little Spoon"> Little Spoon 
+          </label>
+          <!-- <br> -->
+          <label class="checkbox-inline">
+            <input type="checkbox" name="napPref" value="Side By Side"> Side by Side
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="napPref" value="Sea Ottering"> Sea Ottering
+          </label>
+        </div>
+        <label for="envPreferences"> Your napping environmental prefereneces: </label>
+        <div class="checkbox">
+          <label class="checkbox-inline">
+            <input type="checkbox" name="envPref" value="Darkness"> Darkness
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="envPref" value="NightLight"> Night Light
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="envPref" value="Top Bunk"> Top Bunk
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="envPref" value="Bottom Bunk"> Bottom Bunk
+          </label>
+          <br>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="envPref" value="Silence"> Silence
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="envPref" value="TV/Music On"> TV/Music On
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="envPref" value="Ambient Noise"> Ambient Noise
+          </label>
+        </div>
+        <input type="submit" class="btn btn-default" value="Update Profile">
       </form>
-
     </div>
   </div>
 

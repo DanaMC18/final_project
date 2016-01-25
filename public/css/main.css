@@ -16,11 +16,6 @@ html, body {
   border: 1px solid lightgrey;
 }
 
-#profile-pic {
-  width: 30%;
-  float: left;
-}
-
 #signup-modal-container,
 #edit-modal-container {
   display: none;
@@ -38,8 +33,39 @@ html, body {
   position: relative;
   background-position: center;
   background: white;
-  width: 40%;
-  margin: 150px, auto;
+  width: 65%;
+  margin: 1em auto;
   padding: 3%;
   border: 1px solid black;
 }
+
+#signup-header,
+#welcome {
+  text-align: center;
+}
+
+#profile-container {
+  margin: 0 auto;
+  display: block;
+  width: 85%;
+  background-color: #fffbf0;
+  border: 1px solid lightgrey;
+  padding: 2%;
+}
+
+.panel, #right-of-map {
+  margin-left: 51%;
+  margin-right: 15%;
+}
+
+.jumbotron,
+.panel p {
+  padding-left: 2%;
+  margin-top: 0;
+}
+
+.map-thumbnail {
+  max-width: 300px;
+  max-height: 300px;
+}
+

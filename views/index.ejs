@@ -44,7 +44,7 @@
               <input type="text" class="form-control" name="username" placeholder="username">
               <input type="password" class="form-control" name="password" placeholder="password">
             </div>
-            <button type="submit" class="btn btn-default"> Login</button>
+            <button type="submit" class="btn btn-info"> Login</button>
           </form>
         <% } %>
       </div> <!-- /.navbar-collapse -->
@@ -57,7 +57,7 @@
       <h1>napstr <small> It's only creepy if you think about it.</small><h1>
       <p>napstr is a geosocial neworking site allowing users to find and meet fellow DTN partners.</p>
       <% if (!userId) { %>
-        <p><a id="signup-btn" class="btn btn-primary btn-lg" href="#" role="button">Sign Up</a> or Login Above</p>
+        <p><a id="signup-btn" class="btn btn-info btn-lg" href="#" role="button">Sign Up</a> for a nap, stat.</p>
       <% } %>
     <!-- </div> /. page-header -->
   </div> <!-- /.jumbotron -->
@@ -66,28 +66,50 @@
         
   <div id="signup-modal-container">
     <div id="signup-modal">
+
       <button id="close-signup" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h3> Make an Account <br> <small>to find a nap stat</small> </h3>
-      <form action="/user" method="post">
-        <label for="name"> Name: </label>
-        <input type="text" name="name">
-        <br>
-        <label for="username"> Username: </label> 
-        <input type="text" name="username">
-        <br>
-        <label for="email"> Email: </label>
-        <input type="text" name="email">
-        <br>
-        <label for="password"> Password: </label>
-        <input type="password" name="password">
-        <br>
-        <label for="password_confirm"> Confirm Password: </label>
-        <input type="password" name="password_confirm">
-        <br>
-        <input type="submit" value="Sign up!">
+
+      <h3 id="signup-header"> Make an Account </h3>
+      <form class="form-horizontal" action="/user" method="post">
+        <div class="form-group">
+          <label for="name" class="col-sm-3 control-label"> Name: </label>
+          <div class="col-sm-9">
+            <input type="text" name="name" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="username" class="col-sm-3 control-label"> Username: </label> 
+          <div class="col-sm-9">
+            <input type="text" name="username" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-3 control-label"> Email: </label>
+          <div class="col-sm-9">
+            <input type="text" name="email" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-3 control-label"> Password: </label>
+          <div class="col-sm-9">
+            <input type="password" name="password" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password_confirm" class="col-sm-3 control-label"> Confirm Password: </label>
+          <div class="col-sm-9">
+            <input type="password" name="password_confirm" class="form-control">
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default"> Sign Up! </button>
+          </div>
+        </div> -->
+        <input type='submit' class="btn btn-default" value-"Sign Up!">
       </form> 
-    </div>
-  </div>
+    </div> <!-- /. modal content -->
+  </div> <!-- /. modal container -->
 </div> <!--/. index content -->
 
 </body>

@@ -58,25 +58,35 @@
 
 
   <div ng-controller="UsersController as napstrs">
-    <h3> Welcome <%= username %> </h3>
-    <p> Search: <input ng-model="filterPref"></p>
-    <p> Filter:
-    <select ng-model="filterPref">
-      <option value="Big Spoon"> Big Spoon </option>
-      <option value="Little Spoon"> Little Spoon </option>
-      <option value="Side by Side"> Side by Side </option>
-      <option value="Sea Ottering"> Sea Ottering </option>
-    </select> </p>
-    <br>
-    
-    <h4> napstrs near you:</h4>
+    <div id="right-of-map">
+      <h3> Welcome <%= username %> </h3>
+      <p> Search: <input ng-model="filterPref"></p>
+      <p> Filter:
+      <select ng-model="filterPref">
+        <option value="Big Spoon"> Big Spoon </option>
+        <option value="Little Spoon"> Little Spoon </option>
+        <option value="Side by Side"> Side by Side </option>
+        <option value="Sea Ottering"> Sea Ottering </option>
+      </select> </p>
+      <br>
+      
+      <h4> napstrs near you:</h4>
+    </div> <!--/. right of map -->
     <div ng-repeat="napstr in napstrs.all | filter:filterPref">
       <div class="panel panel-info">
-        <div class="panel-heading"> <strong> <a href="/profiles/{{napstr._id}}">{{napstr.username}} </strong> </a> </div>
-        <br> <em>{{napstr.aboutMe}}</em>
-        <br> <strong>Nap Preferences:</strong> {{napstr.napPreferences[0]}}
-        <br> <strong>Environmental Preferences: </strong> {{napstr.envPreferences[0]}}
-        <br> <a href="/profiles/{{napstr._id}}">Book Nap</a>
+        <div class="panel-heading"> 
+          <strong> <a href="/profiles/{{napstr._id}}">{{napstr.username}} </strong> </a> 
+        </div>
+        <br> 
+        <p>
+          <em>{{napstr.aboutMe}}</em>
+          <br> 
+          <strong>Nap Preferences:</strong> {{napstr.napPreferences}}
+          <br> 
+          <strong>Environmental Preferences: </strong> {{napstr.envPreferences}}
+          <br>
+          <a href="/profiles/{{napstr._id}}">Book Nap</a>
+        </p>
       </div> <!--/. panel-default -->
     </div> <!--/. repeat -->
   

@@ -30,7 +30,7 @@ MongoClient.connect(mongoUrl, function (err, database){
   //       username: 'DanaMC18',
   //       email: 'DanaCzinsky@gmail.com',
   //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
-  //       profilePic: 'http://cdn2.pitchfork.com/news/44784/4b25fb88.jpg',
+  //       profilePic: 'http://i.imgur.com/hLdC6sb.jpg',
   //       aboutMe: 'Looking for a dude to cuddle with',
   //       availability: true,
   //       rating: 3,
@@ -233,8 +233,8 @@ app.get('/users', function (req, res){
             {
               $geometry: {type: 'Point', coordinates: userLocation},
               $minDistance: 0,
-              $maxDistance: 16093
-              // $maxDistance: 100000
+              // $maxDistance: 16093
+              $maxDistance: 100000
             }
           }
         }).toArray(function (err, data){

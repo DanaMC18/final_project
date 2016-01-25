@@ -50,11 +50,12 @@ function initMap() {
         var contentString = '<div id="content">' +
         '<div id="siteNotice">' +
         '</div>' +
-        '<h1>' + napstr.username + '</h1>' +
+        '<h4>' + napstr.username + '</h4>' +
+        '<img class="map-thumbnail" src=' + napstr.profilePic + '>' +
         '<p> <em>' + napstr.aboutMe + '</em> </p>';
 
         var infowindow = new google.maps.InfoWindow({
-          content: contentString
+          content: contentString,
         });
 
 
