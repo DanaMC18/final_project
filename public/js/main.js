@@ -37,7 +37,6 @@ function initMap() {
       data: pos
     }).done(function(response){
       response.forEach(function(napstr){
-        //had napstr.location.coordinates[0] for some reason at some point?
         var lat = parseFloat(napstr.location.coordinates[0]);
         var lng = parseFloat(napstr.location.coordinates[1]);
         var napstrPos = {'lat': lat, 'lng': lng}
@@ -143,7 +142,7 @@ $(document).ready(function(){
       dataType: 'JSON',
       data: request
     }).done(function(response){
-      
+
     })});
 
 

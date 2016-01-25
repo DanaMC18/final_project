@@ -118,21 +118,25 @@ app.post('/user', function (req, res) {
     var username = req.body.username;
     var email = req.body.email;
     var password = bcrypt.hashSync(req.body.password, 8);
-    
+
+    var lat = parseFloat(req.body.lat);
+    var lng = parseFloat(req.body.lng);
+    var userLocation = {type: 'Point', coordinates: [lat, lng]};
+
     db.collection('napstrs').insert({
       name: name, 
       username: username, 
       email: email, 
-      password_digest: password
+      password_digest: password,
+      location: userLocation
     }, function (err, data) {
-      // console.log(data); 
     });
-    //log in new user and redirect them to their profile page
+    //log in new user and redirect them
     authenticateUser(username, req.body.password, function (user) {
       if (user) {
         req.session.username = user.username;
         req.session.userId = user._id;
-        res.redirect('/profiles/' + req.session.userId);
+        res.redirect('/search');
       }
     })
   }
@@ -176,13 +180,6 @@ app.delete('/profiles/:id', function (req, res){
 })
 
 
-//about page
-app.get('/about', function (req, res){
-  var username = req.session.username || false;
-  res.render('about', {username: username});
-})
-
-
 //search page: render map and list of users next to map
 app.get('/search', function (req, res){
   var username = req.session.username || false;
@@ -219,37 +216,33 @@ app.post('/search', function (req, res){
 app.get('/users', function (req, res){
   var userId = req.session.userId || false;
  
-  if (!userId) {
-    res.redirect('/'); // only logged in users can see search page
-  } else {
-    //find logged in user
-    db.collection('napstrs').findOne({_id: ObjectId(userId)},
-      function (err, data){
-        var lat = parseFloat(data.location.coordinates[0]);
-        var lng = parseFloat(data.location.coordinates[1]);
-        var userLocation = [lat, lng];
-       
-        // sort napstrs based on logged in user's geolocation as defined above and
-        // send them back sorted to $http in fetch() in UsersController
-        db.collection('napstrs').find({
-          location: 
-          { $near: 
-            {
-              $geometry: {type: 'Point', coordinates: userLocation},
-              $minDistance: 0,
-              // $maxDistance: 16093
-              $maxDistance: 100000
-            }
+  //find logged in user
+  db.collection('napstrs').findOne({_id: ObjectId(userId)},
+    function (err, data){
+      var lat = parseFloat(data.location.coordinates[0]);
+      var lng = parseFloat(data.location.coordinates[1]);
+      var userLocation = [lat, lng];
+     
+      // sort napstrs based on logged in user's geolocation as defined above and
+      // send them back sorted to $http in fetch() in UsersController
+      db.collection('napstrs').find({
+        location: 
+        { $near: 
+          {
+            $geometry: {type: 'Point', coordinates: userLocation},
+            $minDistance: 0,
+            // $maxDistance: 16093
+            $maxDistance: 100000
           }
-        }).toArray(function (err, data){
-          if (err) {
-            console.log(err)
-          } else {
-            res.json(data);
-          }
-        }) // end: sorting all napstrs
-      }) // end: finding logged-in napstr
-  } // end: first if/else
+        }
+      }).toArray(function (err, data){
+        if (err) {
+          console.log(err)
+        } else {
+          res.json(data);
+        }
+      }) // end: sorting all napstrs
+    }) // end: finding logged-in napstr
 })
 
 
@@ -272,6 +265,7 @@ app.post('/requests/:id/create', function (req, res){
 
 //when a user confirms a request
 app.post('/requests/:id/confirm', function (req, res) {
+  console.log('confirm');
   db.collection('napstrs').update({_id: ObjectId(req.params.id), 'requests.name': req.body.name, 'requests.date': req.body.date},
     {$set: {'requests.$.pending': false, 'requests.$.confirmed': true}},
     function (err, data){
