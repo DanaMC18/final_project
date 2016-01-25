@@ -249,6 +249,23 @@ app.get('/users', function (req, res){
 })
 
 
+app.post('/requests/:id/create', function (req, res){
+  var username = req.session.username || false;
+  var newRequest = {
+    name: username, 
+    pending: true,
+    confirmed: false,
+    denied: false};
+
+  db.collection('napstrs').update({_id: ObjectId(req.params.id)},
+    {$addToSet: {requests: newRequest}}, 
+    function (err, data){
+      res.end();
+  })
+})
+
+
+
 app.listen(process.env.PORT || 3000);
 
 

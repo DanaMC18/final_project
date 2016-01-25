@@ -33,24 +33,23 @@ https://gomockingbird.com/projects/pqqwxfz
 MongoDB: napstr
 Collection: napstrs
 Document: 
-  [{name: 'string',
-  username: 'string',
-  email: 'string',
-  password_digest: 'string',
-  profilePic: 'string',
-  aboutMe: 'string',
-  availability: boolean,
-  rating: integer (out of 3),
-  location: [lat (integer), lng (integer)],
-  napPreferences: ['string', 'string'],
-  envPreferences: ['string', 'string'],
-  reviews: [{user: 'string',
-            content: 'string'}],
-  requests: [{name: 'string', 
-            pending: boolean, 
-            confirmed: boolean, 
-            denied: boolean, 
-            date: 'string'}]
+  [{name: String,
+  username: String,
+  email: String,
+  password_digest: String,
+  profilePic: String,
+  aboutMe: String,
+  availability: Boolean,
+  rating: Integer (out of 3),
+  location: {type: 'Point', coordinates: [lat (Integer), lng (Integer)]},
+  napPreferences: [String, String],
+  envPreferences: [String, String],
+  reviews: [{user: String,
+            content: String}],
+  requests: [{name: String, 
+            pending: Boolean, 
+            confirmed: Boolean, 
+            denied: Boolean}]
   ]
 ```
 

@@ -10,17 +10,15 @@ function UsersController($http){
 
   ctrl.fetch = function(){
     $http.get('/users').then(function (response){
-      // console.log(response.data);
       ctrl.all = response.data;
     })
   }
-  
-  // ctrl.find = function(userId){
-  //   $http.get('/users/' + userId).then(function (response){
-  //     console.log(response.data);
-  //   })
-  // }
 
+  ctrl.request = function(napstr) {
+    $http.post('/requests/' + napstr._id + '/create', napstr).then(function (response){
+    })
+  }
+  
 
   ctrl.fetch();
 

@@ -57,7 +57,7 @@
   <div id="profile-container" class="container">
     <div class="row">
       <div class="col-md-4">
-        <img id="profile-pic" class="img-fluid img-thumbnail" src="<%=user.profilePic%>">
+        <img class="img-fluid img-thumbnail" src="<%=user.profilePic%>">
       </div>
       <div class="col-md-6">
           <h3> <%=user.username %> <%userId%></h3>
@@ -87,6 +87,8 @@
             <form action="/profiles/<%=user._id%>?_method=delete" method="post">
               <input type="submit" class="btn btn-info" value="Delete Profile">
             </form>
+          <% } else { %>
+            <!--  <button class="btn btn-info" ng-click="napstrs.book(napstr)">Request a Nap </button> -->
           <% } %>
 
       </div>
