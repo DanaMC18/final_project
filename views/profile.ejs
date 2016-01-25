@@ -59,6 +59,7 @@
       <div class="col-md-4">
         <img class="img-fluid img-profile-thumb" src="<%=user.profilePic%>">
       </div>
+      
       <div id="profile-container" class="col-md-6 col-md-offset-2">
           <h3> <%=user.username %> <%userId%></h3>
           <p> <strong>Name: </strong><%=user.name %></p>
@@ -68,21 +69,18 @@
           <p> <strong>Nap Environment Preferences: </strong><%=user.envPreferences %></p>
           <p> <strong>Rating: </strong><%=user.rating %></p>
           
-          <p> <strong>Reviews: </strong> </p>
-          <% if (user.reviews) { %>
-            <% user.reviews.forEach(function(review){ %>
-              <p><%=review.name%>: <%=review.content%></p>
-              <% }) %>
-          <% } %>
+          <div class="reviews-container">
+            <h4> Reviews: </h4>
+            <% if (user.reviews) { %>
+              <% user.reviews.forEach(function(review){ %>
+                <p> <strong> <%=review.name%>: </strong> 
+                <%=review.content%></p>
+                <% }) %> <!--/. forEach -->
+            <% } %> <!-- if (user.reviews) -->
+          </div>
 
           <% if (user._id == userId) { %> 
-              <a id="edit-btn" class="btn btn-info" href="#">Edit</a>
-            <div class="delete-btns">
-              <form action="/profiles/<%=user._id%>?_method=delete" method="post">
-                <input type="submit" class="btn btn-info" value="Delete Profile">
-              </form>
-            </div>
-
+            <!-- <br> -->
             <div class="requests-container">
               <h4> Requests: </h4>
               <% if (user.requests) { %>
@@ -118,14 +116,17 @@
                       </p>
 
                   <% } %> <!-- /. if/else pending, confirmed, denied -->
-
                 <% }) %> <!-- /. forEach -->
               <% } %> <!-- /. if/else (user.requests) -->
-
             </div> <!-- /. requests-container -->
+
+            <a id="edit-btn" class="btn btn-info" href="#">Edit</a>
+            <div class="delete-btns">
+              <form action="/profiles/<%=user._id%>?_method=delete" method="post">
+                <input type="submit" class="btn btn-info" value="Delete Profile">
+              </form>
+            </div>
           <% } %> <!--/. if/else (user._id == userId) -->
-
-
       </div> <!-- /. profile-container -->
     </div> <!-- /. row -->
 

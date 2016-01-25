@@ -256,7 +256,6 @@ app.post('/requests/:id/create', function (req, res){
     name: username, 
     pending: true,
     confirmed: false,
-    denied: false,
     date: new Date()};
 
   db.collection('napstrs').update({_id: ObjectId(req.params.id)},
@@ -268,19 +267,13 @@ app.post('/requests/:id/create', function (req, res){
 
 
 //when a user confirms a request
-//DOESN'T WORK
 app.post('/requests/:id/confirm', function (req, res) {
   console.log(req.body.name);
+
   db.collection('napstrs').update({_id: ObjectId(req.params.id), 'requests.name': req.body.name},
-    {$set: {
-          name: req.body.name, 
-          pending: false, 
-          confirmed: true, 
-          denied: false,
-          date: new Date()}},
+    {$set: {'requests.$.pending': false, 'requests.$.confirmed': true}},
     function (err, data){
       console.log(data);
-      res.redirect('/profiles/' + req.params.id) 
     })
 })
 

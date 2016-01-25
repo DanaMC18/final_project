@@ -11,7 +11,7 @@ html, body {
 
 #map {
   height: 100%;
-  width: 50%;
+  width: 60%;
   float: left;
   border: 1px solid lightgrey;
 }
@@ -48,15 +48,24 @@ html, body {
  /* margin: 0 auto;
   display: block;
   width: 85%;*/
-  background-color: #fffbf0;
+  /*background-color: #fffbf0;*/
+  background-color: #EEEEEE;
   border: 1px solid lightgrey;
   padding: 2%;
 }
 
-.requests-container {
-  background: honeydew;
-  border-top: 1px solid lightgrey;
+.reviews-container {
+  background: azure;
+  border: 1px solid lightgrey;
   margin-top: 1em;
+  padding: 1%;
+}
+
+.requests-container {
+  background: WhiteSmoke;
+  border: 1px solid lightgrey;
+  margin-top: 1em;
+  margin-bottom: 3em;
   padding: 1%;
 }
 
@@ -65,16 +74,15 @@ html, body {
 }
 
 .img-profile-thumb {
-  max-width: 500px;
+  max-width: 450px;
   max-height: 500px;
+  border: 1px solid lightgrey;
   /*background: #52BCDC;*/
-  background: #EEEEEE;
-  padding: 3%;
 }
 
 .panel, #right-of-map {
-  margin-left: 51%;
-  margin-right: 15%;
+  margin-left: 61%;
+  margin-right: 5%;
 }
 
 .jumbotron,
