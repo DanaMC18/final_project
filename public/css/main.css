@@ -62,11 +62,15 @@ html, body {
 }
 
 .pending-requests {
-  background: #fffbf0;
+  background: #ffe5e5;
 }
 
 .confirmed-requests {
   background: honeydew;
+}
+
+.denied-requests {
+  background: #ffebe5;
 }
 
 .delete-btns {

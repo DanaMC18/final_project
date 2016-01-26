@@ -28,3 +28,37 @@
   "requests": [{"name": "Dana", "pending": false, "confirmed": true, "denied": false, "date": 2016-01-20
 }
 ]
+
+
+// db.collection('napstrs').remove({});
+
+  // db.collection('napstrs').insert({
+  //       name: 'Dana',
+  //       username: 'DanaMC18',
+  //       email: 'DanaCzinsky@gmail.com',
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
+  //       profilePic: 'http://i.imgur.com/hLdC6sb.jpg',
+  //       aboutMe: 'Looking for a dude to cuddle with',
+  //       availability: true,
+  //       rating: 3,
+  //       location: {type: 'Point', coordinates: [40.7411, -73.9897]},
+  //       napPreferences: ['little spoon'],
+  //       envPreferences: ['dark', 'quiet'],
+  //       reviews: [{name: 'Jon', content: 'would nap again'}],
+  //       requests: [{name: 'Jon', pending: true, confirmed: false, denied: false, date: '2016-01-21'}]
+  //     });
+
+  // db.collection('napstrs').insert({
+  //       name: 'Jon',
+  //       username: 'JonnyCastle',
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
+  //       profilePic: 'https://redlightnaps.files.wordpress.com/2007/05/dd20_img_13.jpg',
+  //       aboutMe: 'I\'d never put you in the corner',
+  //       availability: true,
+  //       rating: 3,
+  //       location: {type: 'Point', coordinates: [40.7421, -73.9880]},
+  //       napPreferences: ['big spoon'],
+  //       envPreferences: ['rain noise', 'night light'],
+  //       reviews: [{name: 'Baby', content: 'i had the time of my life'}],
+  //       requests: [{name: 'Dana', pending: false, confirmed: true, denied: false, date: '2016-01-20'}]
+  // });

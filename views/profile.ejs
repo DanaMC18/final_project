@@ -67,7 +67,7 @@
           <p> <strong>About: </strong><em><%=user.aboutMe %></em></p>
           <p> <strong>Napping Preferences: </strong><%=user.napPreferences %></p>
           <p> <strong>Nap Environment Preferences: </strong><%=user.envPreferences %></p>
-          <p> <strong>Rating: </strong><%=user.rating %></p>
+          <!-- <p> <strong>Rating: </strong><%=user.rating %></p> -->
           
           <div class="reviews-container">
             <h4> Reviews: </h4>
@@ -119,6 +119,15 @@
                       </p>
                     </div>
 
+                  <% } else if (request.denied) { %>
+
+                    <div class="denied-requests">
+                      <h5> Confirmed: </h5>
+                      <p> <strong> <%= request.name %></strong> 
+                        <%= request.date %>
+                      </p>
+                    </div>
+
                   <% } %> <!-- /. if/else pending, confirmed, denied -->
                 <% }) %> <!-- /. forEach -->
               <% } %> <!-- /. if/else (user.requests) -->
@@ -149,37 +158,35 @@
           <label for="name"> Name: </label>
           <input type="text" name="name" class="form-control"value="<%=user.name%>">
         </div>
-        <!-- <br> -->
+       
         <div class="form-group">
           <label for="username"> Username: </label>
           <input type="text" name="username" class="form-control" value="<%=user.username%>">
         </div>
-        <!-- <br> -->
+      
         <div class="form-group">
           <label for="email"> Email: </label>
           <input type="text" name="email" class="form-control" value="<%=user.email%>">
         </div>
-        <!-- <br> -->
+       
         <div class="form-group">
           <label for="profilePic"> Profile Picture URL: </label>
           <input type="text" name="profilePic" class="form-control" value="<%=user.profilePic%>">
         </div>
-        <!-- <br> -->
+       
         <div class="form-group">
           <label for="name"> About: </label>
           <textarea name="aboutMe" class="form-control" rows="2" cols="50"> <%=user.aboutMe %> </textarea>
         </div>
-        <!-- <br> -->
-        <label for="napPreferences"> Napping Preferences (you prefer being): </label>
-        <!-- <br> -->
+        
+        <label for="napPreferences"> Napping Preferences (you prefer being): </label>  
         <div class="checkbox">
           <label class="checkbox-inline">
             <input type="checkbox" name="napPref" value="Big Spoon"> Big Spoon 
           </label>
           <label class="checkbox-inline">
             <input type="checkbox" name="napPref" value="Little Spoon"> Little Spoon 
-          </label>
-          <!-- <br> -->
+          </label> 
           <label class="checkbox-inline">
             <input type="checkbox" name="napPref" value="Side By Side"> Side by Side
           </label>
@@ -187,6 +194,7 @@
             <input type="checkbox" name="napPref" value="Sea Ottering"> Sea Ottering
           </label>
         </div>
+
         <label for="envPreferences"> Your napping environmental prefereneces: </label>
         <div class="checkbox">
           <label class="checkbox-inline">

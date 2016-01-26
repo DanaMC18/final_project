@@ -23,39 +23,6 @@ MongoClient.connect(mongoUrl, function (err, database){
   if (err) {throw err;}
   db = database;
 
-  // db.collection('napstrs').remove({});
-
-  // db.collection('napstrs').insert({
-  //       name: 'Dana',
-  //       username: 'DanaMC18',
-  //       email: 'DanaCzinsky@gmail.com',
-  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
-  //       profilePic: 'http://i.imgur.com/hLdC6sb.jpg',
-  //       aboutMe: 'Looking for a dude to cuddle with',
-  //       availability: true,
-  //       rating: 3,
-  //       location: {type: 'Point', coordinates: [40.7411, -73.9897]},
-  //       napPreferences: ['little spoon'],
-  //       envPreferences: ['dark', 'quiet'],
-  //       reviews: [{name: 'Jon', content: 'would nap again'}],
-  //       requests: [{name: 'Jon', pending: true, confirmed: false, denied: false, date: '2016-01-21'}]
-  //     });
-
-  // db.collection('napstrs').insert({
-  //       name: 'Jon',
-  //       username: 'JonnyCastle',
-  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
-  //       profilePic: 'https://redlightnaps.files.wordpress.com/2007/05/dd20_img_13.jpg',
-  //       aboutMe: 'I\'d never put you in the corner',
-  //       availability: true,
-  //       rating: 3,
-  //       location: {type: 'Point', coordinates: [40.7421, -73.9880]},
-  //       napPreferences: ['big spoon'],
-  //       envPreferences: ['rain noise', 'night light'],
-  //       reviews: [{name: 'Baby', content: 'i had the time of my life'}],
-  //       requests: [{name: 'Dana', pending: false, confirmed: true, denied: false, date: '2016-01-20'}]
-  // });
-
   process.on('exit', db.close);
 });
 
@@ -78,9 +45,7 @@ var authenticateUser = function(username, password, callback) {
   })
 }
 
-
 //ROUTES
-
 
 //index, check if user is logged in and send username to index.ejs
 app.get('/', function (req, res){
@@ -147,9 +112,13 @@ app.post('/user', function (req, res) {
 app.get('/profiles/:id', function (req, res){
   var username = req.session.username || false;
   var userId = req.session.userId || false;
-  db.collection('napstrs').findOne({_id: ObjectId(req.params.id)}, function (err, data){
-    res.render('profile', {username: username, userId: userId, user: data});
-  })
+  if (userId) {
+    db.collection('napstrs').findOne({_id: ObjectId(req.params.id)}, function (err, data){
+      res.render('profile', {username: username, userId: userId, user: data});
+    })
+  } else {
+    res.redirect('/')
+  }
 })
 
 
@@ -263,11 +232,9 @@ app.post('/requests/:id/create', function (req, res){
   })
 })
 
-// CHECKPOINTTTTTTT!!!!!!!!!
 
 //when a user confirms a request
 app.post('/requests/:id/confirm', function (req, res) {
-  console.log('confirm');
   var username = req.session.username || false;
   var userId = req.session.userId || false;
 
@@ -285,15 +252,14 @@ app.post('/requests/:id/confirm', function (req, res) {
 
 //when a user denies a request
 app.post('/requests/:id/deny', function (req, res) {
-  console.log(req.body);
   db.collection('napstrs').update({_id: ObjectId(req.params.id), 
     'requests.name': req.body.name, 
     'requests.pending': true,
     'requests.confirmed': false},
-    {$set: {'requests.$.pending': false, 'requests.$.confirmed': false, 'requests.$.denied': true}},
-    function (err, data){
-      res.redirect('/profiles/'+ req.params.id)
-    })
+      {$set: {'requests.$.pending': false, 'requests.$.confirmed': false, 'requests.$.denied': true}},
+      function (err, data){
+        res.redirect('/profiles/'+ req.params.id)
+      })
 })
 
 
