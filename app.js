@@ -253,6 +253,7 @@ app.post('/requests/:id/create', function (req, res){
     name: username, 
     pending: true,
     confirmed: false,
+    denied: false,
     date: new Date()};
 
   db.collection('napstrs').update({_id: ObjectId(req.params.id)},
@@ -262,25 +263,36 @@ app.post('/requests/:id/create', function (req, res){
   })
 })
 
+// CHECKPOINTTTTTTT!!!!!!!!!
 
 //when a user confirms a request
 app.post('/requests/:id/confirm', function (req, res) {
   console.log('confirm');
-  db.collection('napstrs').update({_id: ObjectId(req.params.id), 'requests.name': req.body.name, 'requests.date': req.body.date},
-    {$set: {'requests.$.pending': false, 'requests.$.confirmed': true}},
-    function (err, data){
-      res.redirect('/profiles/' + req.params.id)
-    })
+  var username = req.session.username || false;
+  var userId = req.session.userId || false;
+
+  db.collection('napstrs').update({_id: ObjectId(req.params.id), 
+    'requests.name': req.body.name, 
+    'requests.pending': true, 
+    'requests.confirmed': false,
+    'requests.denied': false},
+      {$set: {'requests.$.pending': false, 'requests.$.confirmed': true}}, 
+      function (err, data) {
+        res.redirect('/profiles/' + req.params.id);
+      })
 })
 
 
-//when a user denies a request: just deletes the request all together
+//when a user denies a request
 app.post('/requests/:id/deny', function (req, res) {
   console.log(req.body);
-  db.collection('napsters').update({_id: ObjectId(req.params.id)},
-    {$pull: {requests: {name: req.body.name, date: req.body.date}}},
-    function (err, data) {
-      res.redirect('/profiles/' + req.params.id)
+  db.collection('napstrs').update({_id: ObjectId(req.params.id), 
+    'requests.name': req.body.name, 
+    'requests.pending': true,
+    'requests.confirmed': false},
+    {$set: {'requests.$.pending': false, 'requests.$.confirmed': false, 'requests.$.denied': true}},
+    function (err, data){
+      res.redirect('/profiles/'+ req.params.id)
     })
 })
 
