@@ -30,27 +30,27 @@
 ]
 
 
-// db.collection('napstrs').remove({});
+   // db.collection('napstrs').remove({});
 
   // db.collection('napstrs').insert({
   //       name: 'Dana',
   //       username: 'DanaMC18',
   //       email: 'DanaCzinsky@gmail.com',
   //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
-  //       profilePic: 'http://i.imgur.com/hLdC6sb.jpg',
-  //       aboutMe: 'Looking for a dude to cuddle with',
+  //       profilePic: 'http://www.thisiswhyimbroke.com/images/pizza-slice-sleeping-bag1-640x533.jpg',
+  //       aboutMe: 'what\'s your thread count?',
   //       availability: true,
   //       rating: 3,
   //       location: {type: 'Point', coordinates: [40.7411, -73.9897]},
-  //       napPreferences: ['little spoon'],
-  //       envPreferences: ['dark', 'quiet'],
+  //       napPreferences: ['Sea Ottering'],
+  //       envPreferences: ['Dark'],
   //       reviews: [{name: 'Jon', content: 'would nap again'}],
-  //       requests: [{name: 'Jon', pending: true, confirmed: false, denied: false, date: '2016-01-21'}]
+  //       requests: [{name: 'jonny_castle', pending: true, confirmed: false, denied: false, date: new Date()}]
   //     });
 
   // db.collection('napstrs').insert({
   //       name: 'Jon',
-  //       username: 'JonnyCastle',
+  //       username: 'jonny_castle',
   //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
   //       profilePic: 'https://redlightnaps.files.wordpress.com/2007/05/dd20_img_13.jpg',
   //       aboutMe: 'I\'d never put you in the corner',
@@ -58,7 +58,55 @@
   //       rating: 3,
   //       location: {type: 'Point', coordinates: [40.7421, -73.9880]},
   //       napPreferences: ['big spoon'],
-  //       envPreferences: ['rain noise', 'night light'],
+  //       envPreferences: ['night light'],
   //       reviews: [{name: 'Baby', content: 'i had the time of my life'}],
-  //       requests: [{name: 'Dana', pending: false, confirmed: true, denied: false, date: '2016-01-20'}]
+  //       requests: [{name: 'Dana', pending: false, confirmed: true, denied: false, date: new Date()}]
   // });
+
+  // db.collection('napstrs').insert({
+  //       name: 'LeeLoo',
+  //       username: 'fifth_element',
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
+  //       profilePic: 'http://lovelace-media.imgix.net/uploads/840/1fcec8a0-fd4e-0132-f425-0e18518aac2f.jpg?w=684&h=513&fit=crop&crop=faces&auto=format&q=70',
+  //       aboutMe: 'Multipass',
+  //       availability: true,
+  //       rating: 3,
+  //       location: {type: 'Point', coordinates: [40.7577, -73.9857]},
+  //       napPreferences: ['Big Spoon'],
+  //       envPreferences: ['Ambient Noise'],
+  //       reviews: [{name: 'Korben', content: 'i got us tickets to the opera'}],
+  //       requests: [{name: 'Korben', pending: false, confirmed: true, denied: false, date: new Date()}]
+  // });
+
+  // db.collection('napstrs').insert({
+  //       name: 'Ryan',
+  //       username: 'the_gos',
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
+  //       profilePic: 'http://i.dailymail.co.uk/i/pix/2013/04/09/article-0-1934A887000005DC-728_634x561.jpg',
+  //       aboutMe: 'hey girl, i\'m all about spoon-size fluidity',
+  //       availability: true,
+  //       rating: 3,
+  //       location: {type: 'Point', coordinates: [40.7408, -73.9896]},
+  //       napPreferences: ['Big Spoon'],
+  //       envPreferences: ['Silence'],
+  //       reviews: [{name: 'DanaMC18', content: 'shotty next nap'}],
+  //       requests: [{name: 'purebred', pending: false, confirmed: true, denied: false, date: new Date()}]
+  // });
+
+
+  // db.collection('napstrs').insert({
+  //       name: 'Sir Barky Von Cuddler',
+  //       username: 'purebred',
+  //       password_digest: '$2a$08$QlbmpKgTCLWiqnNWAoN7nen0FJT.YBF..vlH0n4vO3sVh1AzhtMNG',
+  //       profilePic: 'https://ak-hdl.buzzfed.com/static/enhanced/webdr03/2013/6/26/10/enhanced-buzz-29051-1372256362-13.jpg',
+  //       aboutMe: 'i have very refined tastes',
+  //       availability: true,
+  //       rating: 3,
+  //       location: {type: 'Point', coordinates: [40.7356, -73.9906]},
+  //       napPreferences: ['Little Spoon'],
+  //       envPreferences: ['TV/Music On'],
+  //       reviews: [{name: 'the_gos', content: 'certainly the classiest nap ever'}],
+  //       requests: [{name: 'jonny_castle', pending: false, confirmed: true, denied: false, date: new Date()}]
+  // });
+
+

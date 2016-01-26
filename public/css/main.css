@@ -62,7 +62,7 @@ html, body {
 }
 
 .pending-requests {
-  background: #ffe5e5;
+  background: #fffbf0;
 }
 
 .confirmed-requests {
@@ -81,7 +81,6 @@ html, body {
   max-width: 450px;
   max-height: 500px;
   border: 1px solid lightgrey;
-  /*background: #52BCDC;*/
 }
 
 .panel, #right-of-map {
