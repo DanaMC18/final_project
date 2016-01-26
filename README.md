@@ -62,3 +62,4 @@ Document:
 
 ##Link to App
 https://napstr.herokuapp.com/
+(live app is still buggy, but it exists)
