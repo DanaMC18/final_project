@@ -104,6 +104,8 @@ app.post('/user', function (req, res) {
         res.redirect('/search');
       }
     })
+  } else {
+    res.redirect('/');
   }
 })
 
