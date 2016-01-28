@@ -35,13 +35,17 @@ app.use(session({
 var authenticateUser = function(username, password, callback) {
   db.collection('napstrs').findOne({username: username}, function (err, data){
     if (err) {throw err;}
-    bcrypt.compare(password, data.password_digest, function(err, passwordsMatch) {
-      if (passwordsMatch) {
-        callback(data);
-      } else {
-        callback(false);
-      }
-    })
+    if (data) {
+      bcrypt.compare(password, data.password_digest, function (err, passwordsMatch) {
+        if (passwordsMatch) {
+         callback(data);
+        } else {
+         callback(false);
+        }
+      })
+    } else {
+      callback(false);
+    }
   })
 }
 

@@ -8,11 +8,11 @@ napstr is an app for the nap enthusiast. Users can search for fellow DTN users i
 - A user will need to denote whether they are available to host a nap or are looking for an invite.
 - A user should be able to set nap preferences: big spoon, little spoon, side-by-side, top-bunk, etc.
 - A user should be able to set environmental-preferences: length of time, background noise, lighting, attire, hammock, etc.
-- Users should be able to message each other.
-- Users should be able to send and confirm/deny requests.
 
 **Sprint**
-- A user should be able to turn availability on or off.
+- Users should be able to message each other.
+- Users should be able to send and confirm/deny requests.
+- Users should be able to turn availability on or off.
 - When a user turns availability on, they should see other DTN users in close proximity to a particular location.
 - A user should be able to set up a nap schedule during which they are available so other users can leave requests.
 - A user should be able to set up a profile where they are publicly reviewed by fellow napstrs.
@@ -59,6 +59,10 @@ Document:
 - AngularJS
 - Node.js
 - Google Maps API
+- Ajax
 
 ##Link to App
 https://napstr.herokuapp.com/
+Guests, please use the following login credentials:
+**Username:** Guest
+**Password:** pass123
